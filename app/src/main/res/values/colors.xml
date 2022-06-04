@@ -7,11 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="offwhite">#F6F6F6</color>
-    <color name="darkgrey">#444444</color>
-    <color name="grey">#919191F</color>
-    <color name="lightgrey">#BDBDBD</color>
-    <color name="lightestgrey">#E8EDF0</color>
-    <color name="travelblue1">#249FDA</color>
-    <color name="travelblue2">#39C4F3</color>
+
+    <!--TVLK Siloka Palettes-->
+    <color name="gray_700">#FF444444</color>
+    <color name="gray_500">#FF919191</color>
+    <color name="gray_300">#FFBDBDBD</color>
+    <color name="gray_200">#FFE8EDF0</color>
+    <color name="blue_500">#FF249FDA</color>
+    <color name="blue_300">#FF39C4F3</color>
 </resources>
