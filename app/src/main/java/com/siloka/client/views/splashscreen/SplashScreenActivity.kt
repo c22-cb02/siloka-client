@@ -1,9 +1,15 @@
 package com.siloka.client.views.splashscreen
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.animation.AnimationUtils
+import com.siloka.client.R
 import com.siloka.client.databinding.ActivitySplashScreenBinding
+import com.siloka.client.views.main.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -16,9 +22,27 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(view)
 
         setHeader()
+        animateLogo()
+        goToNextPage()
     }
 
     private fun setHeader() {
         supportActionBar?.hide()
+    }
+
+    private fun animateLogo() {
+        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        binding.apply {
+            ivTvlkLogo.startAnimation(fadeIn)
+            tvSiloka.startAnimation(fadeIn)
+        }
+    }
+
+    private fun goToNextPage() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3000)
     }
 }
