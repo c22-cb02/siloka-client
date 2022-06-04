@@ -14,5 +14,11 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        setHeader()
+    }
+
+    private fun setHeader() {
+        supportActionBar?.hide()
     }
 }
