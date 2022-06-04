@@ -12,5 +12,11 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        setHeader()
+    }
+
+    private fun setHeader() {
+        supportActionBar?.hide()
     }
 }

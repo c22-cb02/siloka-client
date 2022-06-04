@@ -9,7 +9,7 @@ import android.os.Looper
 import android.view.animation.AnimationUtils
 import com.siloka.client.R
 import com.siloka.client.databinding.ActivitySplashScreenBinding
-import com.siloka.client.views.main.MainActivity
+import com.siloka.client.views.onboarding.OnboardingActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -40,7 +40,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun goToNextPage() {
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, OnboardingActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)
