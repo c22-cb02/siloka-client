@@ -23,6 +23,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
+    private lateinit var viewModel: OnboardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(view)
 
         setHeader()
+        setViewModel()
         bindSaveUserButton()
     }
 
@@ -38,13 +40,14 @@ class OnboardingActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun bindSaveUserButton() {
-        val pref = UserPreferences.getInstance(dataStore)
-        val viewModel = ViewModelProvider(
+    private fun setViewModel() {
+        viewModel = ViewModelProvider(
             this,
-            ViewModelFactory(pref)
+            ViewModelFactory(UserPreferences.getInstance(dataStore))
         )[OnboardingViewModel::class.java]
+    }
 
+    private fun bindSaveUserButton() {
         binding.btnSaveUserData.setOnClickListener {
             val et = binding.etName
             val name = et.text.toString()

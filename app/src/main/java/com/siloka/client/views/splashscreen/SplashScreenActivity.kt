@@ -25,6 +25,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
+    private lateinit var viewModel: SplashScreenViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +34,20 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(view)
 
         setHeader()
+        setViewModel()
         animateLogo()
         goToNextPage()
     }
 
     private fun setHeader() {
         supportActionBar?.hide()
+    }
+
+    private fun setViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreferences.getInstance(dataStore))
+        )[SplashScreenViewModel::class.java]
     }
 
     private fun animateLogo() {
@@ -50,12 +59,6 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun goToNextPage() {
-        val pref = UserPreferences.getInstance(dataStore)
-        val viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(pref)
-        )[SplashScreenViewModel::class.java]
-
         viewModel.getUser().observe(this, {
             if (it.name.isNotBlank()) {
                 Handler(Looper.getMainLooper()).postDelayed({
