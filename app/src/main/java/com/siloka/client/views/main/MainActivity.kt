@@ -1,26 +1,136 @@
 package com.siloka.client.views.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.siloka.client.R
+import com.siloka.client.adapter.MessageAdapter
+import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.ActivityMainBinding
-import com.siloka.client.views.Settings.SettingsActivity
+import com.siloka.client.views.settings.SettingsActivity
+import org.json.JSONException
+import org.json.JSONObject
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private var chatsRV: RecyclerView? = null
+    private var sendMsgIB: ImageButton? = null
+    private var userMsgEdt: EditText? = null
+    private val USER_KEY = "user"
+    private val BOT_KEY = "bot"
+
+    private var mRequestQueue: RequestQueue? = null
+
+    // creating a variable for array list and adapter class.
+    private lateinit var messageModelArrayList: ArrayList<MessageModel>
+    private var messageAdapter: MessageAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false);
         val view = binding.root
         setContentView(view)
+
+        mRequestQueue = Volley.newRequestQueue(this@MainActivity)
+        mRequestQueue!!.getCache().clear()
+
+        // creating a new array list
+        messageModelArrayList = ArrayList()
+        userMsgEdt?.setText("")
+        // adding on click listener for send message button.
+
+        sendMsgIB?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                if (userMsgEdt!!.text.toString().isEmpty()) {
+                    // if the edit text is empty display a toast message.
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Please enter your message..",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return
+                }
+
+                sendMessage(userMsgEdt!!.text.toString())
+
+                userMsgEdt!!.setText("")
+
+
+                messageAdapter = MessageAdapter(messageModelArrayList, this@MainActivity)
+
+
+                val linearLayoutManager =
+                    LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+
+
+                chatsRV?.layoutManager = linearLayoutManager
+
+
+                chatsRV?.adapter = messageAdapter
+            }
+        })
+    }
+
+    private fun sendMessage(userMsg: String) {
+        messageModelArrayList.add(MessageModel(userMsg, USER_KEY))
+        messageAdapter?.notifyDataSetChanged()
+
+
+        val url = "Enter you API URL here$userMsg"
+
+
+        val queue = Volley.newRequestQueue(this@MainActivity)
+        
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET,
+            url,
+            null, {
+                fun onResponse(response: JSONObject) {
+                    try {
+                        val botResponse = response.getString("cnt")
+                        messageModelArrayList.add(MessageModel(botResponse, BOT_KEY))
+
+                        messageAdapter?.notifyDataSetChanged()
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+
+
+                        messageModelArrayList.add(MessageModel("No response", BOT_KEY))
+                        messageAdapter?.notifyDataSetChanged()
+                    }
+                }
+            }, object : Response.ErrorListener {
+                override fun onErrorResponse(error: VolleyError?) {
+                    // error handling.
+                    messageModelArrayList.add(MessageModel("Sorry no response found", BOT_KEY))
+                    Toast.makeText(
+                        this@MainActivity,
+                        "No response from the bot..",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+
+        queue.add(jsonObjectRequest)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

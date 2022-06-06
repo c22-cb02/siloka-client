@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/bg_bot.xml" value="0.199" />
-        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/bg_type.xml" value="0.199" />
-        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/bg_user.xml" value="0.199" />
+        <entry key="app/src/main/res/font/museo_sans_300.xml" value="0.2712962962962963" />
+        <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
+        <entry key="app/src/main/res/drawable/bg_bot.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_type.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_user.xml" value="0.199" />
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2155" />
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/ic_send_white_24dp.xml" value="0.199" />
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/sendbutton.xml" value="0.198" />

@@ -14,10 +14,13 @@
         android:theme="@style/Theme.Siloka"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".views.onboarding.OnboardingActivity"
+            android:name=".views.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".views.Settings.SettingsActivity"
+            android:name=".views.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.onboarding.OnboardingActivity"
             android:exported="false" />
         <activity
             android:name=".views.splashscreen.SplashScreenActivity"
@@ -28,9 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".views.main.MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
