@@ -18,7 +18,6 @@ import com.siloka.client.databinding.ActivitySplashScreenBinding
 import com.siloka.client.views.ViewModelFactory
 import com.siloka.client.views.main.MainActivity
 import com.siloka.client.views.onboarding.OnboardingActivity
-import com.siloka.client.views.settings.SettingsActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 
@@ -62,7 +61,7 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.getUser().observe(this, {
             if (it.name.isNotBlank()) {
                 Handler(Looper.getMainLooper()).postDelayed({
-                    val intent = Intent(this, SettingsActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }, 2000)
