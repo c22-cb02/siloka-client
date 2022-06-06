@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/font/museo_sans_300.xml" value="0.2712962962962963" />
-        <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.45996942408534025" />
+        <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.15353260869565216" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
       </map>
     </option>
