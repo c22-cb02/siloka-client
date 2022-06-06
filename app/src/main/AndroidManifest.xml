@@ -26,5 +26,4 @@
             android:name=".views.main.MainActivity"
             android:exported="false" />
     </application>
-
 </manifest>
