@@ -18,8 +18,10 @@
     <string name="onboarding_title">Let\'s get you \nStarted</string>
     <string name="onboarding_desc">so that we could help you better \nwith our AI chatbot!</string>
     <string name="et_name_label">Your Name</string>
+    <string name="et_name_error">"Please enter your name before proceeding"</string>
     <string name="button_text">Save User Data</string>
     <string name="onboarding_info">You can still change the \ninformation you fill later</string>
+    <string name="onboarding_success_toast">Data successfully saved!</string>
 
     <!--  Settings  -->
     <string name="settings_title">Settings</string>

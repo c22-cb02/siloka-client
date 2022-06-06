@@ -13,7 +13,7 @@ class SettingsViewModel(private val pref: UserPreferences) : ViewModel() {
         return pref.getUser().asLiveData()
     }
 
-    suspend fun saveUser(user: UserModel) {
+    fun saveUser(user: UserModel) {
         viewModelScope.launch {
             pref.saveUser(user)
         }
