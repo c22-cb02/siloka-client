@@ -27,7 +27,6 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
     companion object {
         @Volatile
         private var INSTANCE: UserPreferences? = null
-
         private val NAME_KEY = stringPreferencesKey("name")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreferences {
