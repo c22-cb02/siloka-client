@@ -18,4 +18,6 @@
     <string name="lets_get_started">Let\'s get you \nStarted</string>
     <string name="onboarding_desc">so that we could help you better \nwith our AI chatbot!</string>
     <string name="et_name_label">Your Name</string>
+    <string name="button_text">Save User Data</string>
+    <string name="onboarding_info">You can still change the \ninformation you fill later</string>
 </resources>
