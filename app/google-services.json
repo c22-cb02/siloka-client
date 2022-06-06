@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "301702815803",
+    "project_id": "siloka-client",
+    "storage_bucket": "siloka-client.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301702815803:android:a1f7b10a332e5dc7dfbc1e",
+        "android_client_info": {
+          "package_name": "com.siloka.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301702815803-nvod1uq7jtic7ir39udam3h4p12i4o21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGDaGdu4yZ_sqwtQzU1rmOOD68H_iHJB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301702815803-nvod1uq7jtic7ir39udam3h4p12i4o21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
