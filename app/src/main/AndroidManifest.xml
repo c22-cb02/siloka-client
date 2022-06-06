@@ -17,6 +17,9 @@
             android:name=".views.onboarding.OnboardingActivity"
             android:exported="false" />
         <activity
+            android:name=".views.Settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.splashscreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
