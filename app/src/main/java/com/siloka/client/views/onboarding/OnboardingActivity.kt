@@ -19,7 +19,6 @@ import com.siloka.client.utilities.showToast
 import com.siloka.client.views.ViewModelFactory
 import com.siloka.client.views.main.MainActivity
 
-
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 
 class OnboardingActivity : AppCompatActivity() {

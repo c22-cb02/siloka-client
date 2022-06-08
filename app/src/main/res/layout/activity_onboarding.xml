@@ -115,7 +115,4 @@
         app:layout_constraintStart_toStartOf="@+id/vg_left_margin"
         tools:ignore="TextContrastCheck" />
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

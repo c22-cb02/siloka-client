@@ -15,6 +15,7 @@
         <item name="textInputStyle">@style/Siloka.TextInputLayout.Style</item>
         <item name="materialButtonStyle">@style/Siloka.Button.Filled.Style</item>
         <item name="editTextStyle">@style/Siloka.TextInputEditText.Style</item>
+        <item name="actionOverflowButtonStyle">@style/IconOverflow</item>
     </style>
 
     <!--  Custom Buttons  -->
@@ -24,6 +25,10 @@
         <item name="cornerRadius">100dp</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="IconOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
     </style>
 
     <!--  Custom TextInputFields  -->
@@ -44,9 +49,5 @@
         <item name="colorPrimary">@color/blue_300</item>
         <item name="colorOnSurface">@color/gray_500</item>
         <item name="colorError">@color/pink_500</item>
-        <item name="actionOverflowButtonStyle">@style/IconOverflow</item>
-    </style>
-    <style name="IconOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">@color/white</item>
     </style>
 </resources>
