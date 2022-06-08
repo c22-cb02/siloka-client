@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/response_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/bg_bot"
+        android:maxWidth="240dp"
+        android:padding="3dp"
+        android:text="@string/are_you_satisfied_with_the_answer"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="1"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/response_feedback"
+        app:layout_constraintStart_toStartOf="@+id/response_feedback"
+        app:layout_constraintTop_toBottomOf="@+id/response_feedback">
+        <Button
+            android:id="@+id/yes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_bot"
+            android:text="@string/yes"
+            app:layout_constraintEnd_toEndOf="@+id/response_feedback"
+            app:layout_constraintTop_toBottomOf="@+id/response_feedback" />
+
+        <Button
+            android:id="@+id/no_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@drawable/bg_user"
+            android:text="@string/no"
+            app:layout_constraintTop_toBottomOf="@+id/response_feedback" />
+    </GridLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

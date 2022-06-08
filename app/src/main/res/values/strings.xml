@@ -29,4 +29,7 @@
 
     <!-- Chatroom -->
     <string name="popular_topics">Popular Topics</string>
+    <string name="are_you_satisfied_with_the_answer">Are you satisfied with the answer?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>
