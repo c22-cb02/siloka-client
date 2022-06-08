@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/layout/shortcut_msg.xml" value="0.23404166121098258" />
         <entry key="app/src/main/res/layout/topic.xml" value="0.12916666666666668" />
         <entry key="app/src/main/res/layout/user_msg.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout/user_sent_message.xml" value="0.14764492753623187" />
       </map>
     </option>
   </component>

@@ -23,7 +23,6 @@ import com.siloka.client.databinding.ActivityMainBinding
 import com.siloka.client.views.settings.SettingsActivity
 import org.json.JSONException
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
 
                 chatsRV?.layoutManager = linearLayoutManager
-
 
                 chatsRV?.adapter = messageAdapter
             }

@@ -1,6 +1,5 @@
 package com.siloka.client.adapter
 
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.siloka.client.R
 import com.siloka.client.data.models.MessageModel
 
-
-class MessageAdapter(private val messageModelArrayList: ArrayList<MessageModel>, context: Context) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageAdapter(
+    private val messageModelArrayList: ArrayList<MessageModel>,
+    context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view: View
-        if(viewType == 0){
-            view = LayoutInflater.from(parent.context).inflate(R.layout.user_msg, parent, false)
-
-        }else{
-            view = LayoutInflater.from(parent.context).inflate(R.layout.bot_msg, parent, false)
+        val view: View = when (viewType == 0) {
+            true -> LayoutInflater.from(parent.context).inflate(
+                R.layout.user_msg, parent, false)
+            false -> LayoutInflater.from(parent.context).inflate(
+                R.layout.bot_msg, parent, false)
         }
         return ViewHolder(view)
     }
@@ -36,11 +35,7 @@ class MessageAdapter(private val messageModelArrayList: ArrayList<MessageModel>,
         return messageModelArrayList.size
     }
 
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        internal var message: TextView
-        init {
-            message = view.findViewById<TextView>(R.id.message) as TextView
-        }
+        internal var message: TextView = view.findViewById(R.id.message) as TextView
     }
 }
