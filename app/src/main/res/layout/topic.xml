@@ -18,7 +18,8 @@
         android:background="@drawable/bg_topic"
         android:maxWidth="240dp"
         android:padding="3dp"
-        tools:text="Topic"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        tools:ignore="TextContrastCheck"
+        tools:text="Topic" />
 
 </androidx.cardview.widget.CardView>
