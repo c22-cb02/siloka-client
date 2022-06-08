@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp">
+
+    <TextView
+        android:id="@+id/tv_topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="700dp"
+        android:background="@drawable/bg_topic"
+        android:maxWidth="240dp"
+        android:padding="3dp"
+        android:textColor="@color/white"
+        tools:ignore="TextContrastCheck"
+        tools:text="Topic" />
+
+</androidx.cardview.widget.CardView>

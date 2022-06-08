@@ -3,10 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2155" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/ic_send_white_24dp.xml" value="0.199" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/drawable/sendbutton.xml" value="0.198" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/activity_onboarding.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/activity_settings.xml" value="0.25" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/activity_splash_screen.xml" value="0.176" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/bot_msg.xml" value="0.4" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/shortcut_msg.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/user_msg.xml" value="0.264" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/user_sent_message.xml" value="0.2" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/usermsg.xml" value="0.4" />
+        <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/menu/option_menu.xml" value="0.176" />
+        <entry key="app/src/main/res/drawable/bg_bot.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_type.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_user.xml" value="0.199" />
         <entry key="app/src/main/res/font/museo_sans_300.xml" value="0.2712962962962963" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
+        <entry key="app/src/main/res/layout/bot_msg.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout/shortcut_msg.xml" value="0.23404166121098258" />
+        <entry key="app/src/main/res/layout/topic.xml" value="0.12916666666666668" />
+        <entry key="app/src/main/res/layout/user_msg.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout/user_sent_message.xml" value="0.14764492753623187" />
       </map>
     </option>
   </component>
