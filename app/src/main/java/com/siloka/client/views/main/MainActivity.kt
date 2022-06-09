@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun sendMessage(userMsg: String) {
-        messageModelArrayList.add(MessageModel(userMsg, USER_KEY))
+        messageModelArrayList.add(MessageModel(1, userMsg, USER_KEY))
         messageAdapter?.notifyDataSetChanged()
 
         val url = "Enter you API URL here$userMsg"
@@ -97,18 +97,18 @@ class MainActivity : AppCompatActivity() {
             null, {
                 try {
                     val botResponse = it.getString("cnt")
-                    messageModelArrayList.add(MessageModel(botResponse, BOT_KEY))
+                    messageModelArrayList.add(MessageModel(0, botResponse, BOT_KEY))
 
                     messageAdapter?.notifyDataSetChanged()
                 } catch (e: JSONException) {
                     e.printStackTrace()
 
-                    messageModelArrayList.add(MessageModel("No response", BOT_KEY))
+                    messageModelArrayList.add(MessageModel(0,"No response", BOT_KEY))
                     messageAdapter?.notifyDataSetChanged()
                 }
             }
         ) { // error handling.
-            messageModelArrayList.add(MessageModel("Sorry no response found", BOT_KEY))
+            messageModelArrayList.add(MessageModel(0,"Sorry no response found", BOT_KEY))
             Toast.makeText(
                 this@MainActivity,
                 "No response from the bot..",
@@ -148,6 +148,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val USER_KEY = "user"
-        private const val BOT_KEY = "bot"
+        private const val BOT_KEY = "siloka"
     }
 }

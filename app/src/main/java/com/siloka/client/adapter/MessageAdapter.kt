@@ -10,7 +10,7 @@ import com.siloka.client.R
 import com.siloka.client.data.models.MessageModel
 
 class MessageAdapter(
-    private val messageModelArrayList: ArrayList<MessageModel>,
+    private val messagesList: ArrayList<MessageModel>,
     context: Context
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -25,15 +25,12 @@ class MessageAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val message = messageModelArrayList[position]
+        val message = messagesList[position]
         message.message = message.message
         (holder as ViewHolder).message.text = message.message
     }
 
-    override fun getItemCount(): Int {
-        // return the size of array list
-        return messageModelArrayList.size
-    }
+    override fun getItemCount(): Int = messagesList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         internal var message: TextView = view.findViewById(R.id.message) as TextView
