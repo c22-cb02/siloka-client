@@ -29,4 +29,6 @@
 
     <!-- Chatroom -->
     <string name="popular_topics">Popular Topics</string>
+    <string name="et_chatbox_hint">Type a Message</string>
+    <string name="fab_send_chat_img_alt">Send Message</string>
 </resources>

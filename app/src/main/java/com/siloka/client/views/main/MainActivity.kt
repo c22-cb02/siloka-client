@@ -2,12 +2,14 @@ package com.siloka.client.views.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,36 +28,50 @@ import org.json.JSONException
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private var chatsRV: RecyclerView? = null
-    private var sendMsgIB: ImageButton? = null
-    private var userMsgEdt: EditText? = null
+    private var rvChatroom: RecyclerView? = null
+    private var ibSendMessage: RelativeLayout? = null
+    private var etChatbox: EditText? = null
 
     private var mRequestQueue: RequestQueue? = null
 
-    // creating a variable for array list and adapter class.
-    private lateinit var messageModelArrayList: ArrayList<MessageModel>
+    private lateinit var messagesList: ArrayList<MessageModel>
     private var messageAdapter: MessageAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
         val view = binding.root
         setContentView(view)
 
+        setHeader()
+        setRequestQueue()
+        setMessages()
+        bindChatbox()
+    }
+
+    private fun setHeader() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF39C4F3")))
+    }
+
+    private fun setRequestQueue() {
         mRequestQueue = Volley.newRequestQueue(this@MainActivity)
         mRequestQueue!!.cache.clear()
+    }
 
-        // creating a new array list
-        messageModelArrayList = ArrayList()
-        userMsgEdt?.setText("")
-        // adding on click listener for send message button.
+    private fun setMessages() {
+        etChatbox = binding.etChatbox
+        ibSendMessage = binding.btnSendChat
 
-        sendMsgIB?.setOnClickListener(object : View.OnClickListener {
+        messagesList = ArrayList()
+        etChatbox?.setText("")
+    }
+
+    private fun bindChatbox() {
+        ibSendMessage?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                if (userMsgEdt!!.text.toString().isEmpty()) {
+                if (etChatbox!!.text.toString().isEmpty()) {
                     // if the edit text is empty display a toast message.
                     Toast.makeText(
                         this@MainActivity,
@@ -65,30 +81,27 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
 
-                sendMessage(userMsgEdt!!.text.toString())
-
-                userMsgEdt!!.setText("")
-
-                messageAdapter = MessageAdapter(messageModelArrayList, this@MainActivity)
-
-                val linearLayoutManager =
-                    LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-
-
-                chatsRV?.layoutManager = linearLayoutManager
-
-                chatsRV?.adapter = messageAdapter
+                sendMessage(etChatbox!!.text.toString())
+                etChatbox!!.setText("")
+                bindRV()
             }
         })
     }
 
+    private fun bindRV() {
+        messageAdapter = MessageAdapter(messagesList, this@MainActivity)
+        val linearLayoutManager =
+            LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+
+        rvChatroom?.layoutManager = linearLayoutManager
+        rvChatroom?.adapter = messageAdapter    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun sendMessage(userMsg: String) {
-        messageModelArrayList.add(MessageModel(1, userMsg, USER_KEY))
+        messagesList.add(MessageModel(1, userMsg, USER_KEY))
         messageAdapter?.notifyDataSetChanged()
 
         val url = "Enter you API URL here$userMsg"
-
         val queue = Volley.newRequestQueue(this@MainActivity)
         
         val jsonObjectRequest = JsonObjectRequest(
@@ -97,18 +110,18 @@ class MainActivity : AppCompatActivity() {
             null, {
                 try {
                     val botResponse = it.getString("cnt")
-                    messageModelArrayList.add(MessageModel(0, botResponse, BOT_KEY))
+                    messagesList.add(MessageModel(0, botResponse, BOT_KEY))
 
                     messageAdapter?.notifyDataSetChanged()
                 } catch (e: JSONException) {
                     e.printStackTrace()
 
-                    messageModelArrayList.add(MessageModel(0,"No response", BOT_KEY))
+                    messagesList.add(MessageModel(0,"No response", BOT_KEY))
                     messageAdapter?.notifyDataSetChanged()
                 }
             }
-        ) { // error handling.
-            messageModelArrayList.add(MessageModel(0,"Sorry no response found", BOT_KEY))
+        ) {
+            messagesList.add(MessageModel(0,"Sorry no response found", BOT_KEY))
             Toast.makeText(
                 this@MainActivity,
                 "No response from the bot..",
@@ -138,9 +151,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu1 -> {
-                val i = Intent(this, SettingsActivity::class.java)
-                startActivity(i)
-                true
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
             }
             else -> true
         }
