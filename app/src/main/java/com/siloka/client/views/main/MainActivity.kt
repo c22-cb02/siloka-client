@@ -90,11 +90,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindRV() {
         messageAdapter = MessageAdapter(messagesList, this@MainActivity)
+
         val linearLayoutManager =
-            LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            LinearLayoutManager(
+                this@MainActivity,
+                RecyclerView.VERTICAL,
+                false
+            )
 
         rvChatroom?.layoutManager = linearLayoutManager
-        rvChatroom?.adapter = messageAdapter    }
+        rvChatroom?.adapter = messageAdapter
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun sendMessage(userMsg: String) {

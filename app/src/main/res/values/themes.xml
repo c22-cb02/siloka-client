@@ -41,7 +41,7 @@
 
     <style name="Siloka.TextInputEditText.Style"
         parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
-        <item name="android:textColor">@color/gray_500</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/gray_500</item>
     </style>
 
