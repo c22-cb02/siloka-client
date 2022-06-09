@@ -11,6 +11,7 @@
         android:id="@+id/rv_chatroom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:background="@color/white"
         android:clipToPadding="false"
         android:paddingTop="10dp"

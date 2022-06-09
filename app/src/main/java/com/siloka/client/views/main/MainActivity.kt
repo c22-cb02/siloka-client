@@ -22,14 +22,13 @@ import com.siloka.client.views.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var messageAdapter: MessageAdapter
 
     private var rvChatroom: RecyclerView? = null
     private var ibSendMessage: RelativeLayout? = null
     private var etChatbox: EditText? = null
 
 //    private var mRequestQueue: RequestQueue? = null
-
-    private var messageAdapter: MessageAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +56,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindRV() {
         messageAdapter = MessageAdapter()
+        rvChatroom = binding.rvChatroom
         rvChatroom?.adapter = messageAdapter
-        rvChatroom?.layoutManager = LinearLayoutManager(this)
+        rvChatroom?.layoutManager = LinearLayoutManager(applicationContext)
 
         setInitialMessages()
     }
@@ -85,20 +85,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setInitialMessages() {
-        messageAdapter?.insertMessage(
+        messageAdapter.insertMessage(
             MessageModel(0, "ayo dong bantai kami", BOT_KEY))
-        messageAdapter?.insertMessage(
+        messageAdapter.insertMessage(
             MessageModel(1, "kalo elo punya nyali", USER_KEY))
-        messageAdapter?.insertMessage(
+        messageAdapter.insertMessage(
             MessageModel(0, "tongkronang kami bukan tongrkongan pecundang", BOT_KEY))
-        messageAdapter?.insertMessage(
+        messageAdapter.insertMessage(
             MessageModel(1, "pecundang", BOT_KEY))
-        messageAdapter?.insertMessage(
+        messageAdapter.insertMessage(
             MessageModel(1, "pecundang", BOT_KEY))
     }
 
     private fun sendMessage(userMsg: String) {
-        messageAdapter?.insertMessage(MessageModel(1, userMsg, USER_KEY))
+        messageAdapter.insertMessage(MessageModel(1, userMsg, USER_KEY))
 
 //        val url = "Enter you API URL here$userMsg"
 //        val queue = Volley.newRequestQueue(this@MainActivity)
@@ -158,6 +158,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val USER_KEY = "user"
-        private const val BOT_KEY = "siloka"
+        const val BOT_KEY = "siloka"
     }
 }

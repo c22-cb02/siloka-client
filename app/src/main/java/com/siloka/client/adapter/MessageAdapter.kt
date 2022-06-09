@@ -8,6 +8,7 @@ import androidx.viewbinding.ViewBinding
 import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.BotMsgBinding
 import com.siloka.client.databinding.UserMsgBinding
+import com.siloka.client.views.main.MainActivity
 
 class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
