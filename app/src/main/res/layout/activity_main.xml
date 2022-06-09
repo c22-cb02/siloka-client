@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:paddingBottom="50dp" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -41,11 +43,13 @@
 
             <EditText
                 android:id="@+id/edChat"
-                android:layout_width="match_parent"
+                android:layout_width="293dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="20dp"
-                android:background="#fff"
+                android:layout_marginBottom="2dp"
+                android:background="#0ffffff"
                 android:hint="Type a Message"
                 android:minHeight="50dp"
                 android:textSize="18sp" />
