@@ -16,7 +16,7 @@
         android:background="@drawable/bg_bot">
 
         <TextView
-            android:id="@+id/idTVBot"
+            android:id="@+id/tv_bot_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

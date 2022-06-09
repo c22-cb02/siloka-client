@@ -15,9 +15,8 @@
         android:orientation="horizontal"
         android:background="@drawable/bg_user">
 
-        <!--text view for displaying user message-->
         <TextView
-            android:id="@+id/idTVUser"
+            android:id="@+id/tv_user_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
