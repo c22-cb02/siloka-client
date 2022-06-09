@@ -1,4 +1,4 @@
-package com.siloka.client.views.adapter
+package com.siloka.client.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.siloka.client.R
-import com.siloka.client.views.entity.Topic
+import com.siloka.client.data.models.Topic
 
 class ShortcutAdapter(private val listTopics: ArrayList<Topic>): RecyclerView.Adapter<ShortcutAdapter.TopicViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
