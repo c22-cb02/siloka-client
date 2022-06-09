@@ -9,9 +9,10 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvChat"
+        android:id="@+id/rv_chatroom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:background="@color/white"
         android:clipToPadding="false"
         android:paddingTop="10dp"
@@ -23,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/rvChat"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_chatroom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -35,28 +36,33 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
-            android:layout_toStartOf="@+id/btnSend"
+            android:layout_toStartOf="@+id/btn_send_chat"
             android:background="@drawable/bg_type"
             android:bottom="2dp"
             android:elevation="2dp"
             android:top="2dp">
 
             <EditText
-                android:id="@+id/edChat"
-                android:layout_width="293dp"
+                style="@style/Siloka.TextInputEditText.Style"
+                android:id="@+id/et_chatbox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#fff"
+                android:hint="@string/et_chatbox_hint"
+                tools:ignore="TextContrastCheck"
+                android:inputType="textMultiLine"
+                android:importantForAutofill="no" />
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="5dp"
                 android:background="#ffffff"
-                android:hint="Type a Message"
                 android:minHeight="40dp"
                 android:textSize="16sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/btnSend"
+            android:id="@+id/btn_send_chat"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
@@ -67,12 +73,14 @@
             android:elevation="4dp">
 
             <ImageView
-                android:id="@+id/send_button"
+                android:id="@+id/fab_send_chat_img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerInParent="true"
+                android:contentDescription="@string/fab_send_chat_img_alt"
                 android:src="@drawable/ic_send_white_24dp"
-                app:tint="#ffffff" />
+                app:tint="#ffffff"
+                tools:ignore="ImageContrastCheck" />
         </RelativeLayout>
 
     </RelativeLayout>

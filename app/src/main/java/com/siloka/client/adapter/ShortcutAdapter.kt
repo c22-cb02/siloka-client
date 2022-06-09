@@ -1,4 +1,4 @@
-package com.siloka.client.views.adapter
+package com.siloka.client.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.siloka.client.R
-import com.siloka.client.views.entity.Topic
+import com.siloka.client.data.models.TopicModel
 
-class ShortcutAdapter(private val listTopics: ArrayList<Topic>): RecyclerView.Adapter<ShortcutAdapter.TopicViewHolder>() {
+class ShortcutAdapter(
+    private val topicsList: ArrayList<TopicModel>
+): RecyclerView.Adapter<ShortcutAdapter.TopicViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -25,12 +27,12 @@ class ShortcutAdapter(private val listTopics: ArrayList<Topic>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
-        val question = listTopics[position].question
+        val question = topicsList[position].question
         holder.tvTopic.text = question
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listTopics[holder.adapterPosition].question) }
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(topicsList[holder.adapterPosition].question) }
     }
 
-    override fun getItemCount(): Int = listTopics.size
+    override fun getItemCount(): Int = topicsList.size
 
     interface OnItemClickCallback {
         fun onItemClicked(question: String)

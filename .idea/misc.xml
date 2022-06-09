@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/bg_type.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/bg_user.xml" value="0.199" />
         <entry key="app/src/main/res/font/museo_sans_300.xml" value="0.2712962962962963" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14764492753623187" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
