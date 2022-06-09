@@ -58,80 +58,10 @@ class MainActivity : AppCompatActivity() {
         userMsgEdt?.setText("")
         // adding on click listener for send message button.
 
-        sendMsgIB?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                if (userMsgEdt!!.text.toString().isEmpty()) {
-                    // if the edit text is empty display a toast message.
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Please enter your message..",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return
-                }
 
-                sendMessage(userMsgEdt!!.text.toString())
-
-                userMsgEdt!!.setText("")
-
-
-                messageAdapter = MessageAdapter(messageModelArrayList, this@MainActivity)
-
-
-                val linearLayoutManager =
-                    LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-
-
-                chatsRV?.layoutManager = linearLayoutManager
-
-
-                chatsRV?.adapter = messageAdapter
-            }
-        })
     }
 
-    private fun sendMessage(userMsg: String) {
-        messageModelArrayList.add(MessageModel(userMsg, USER_KEY))
-        messageAdapter?.notifyDataSetChanged()
 
-
-        val url = "Enter you API URL here$userMsg"
-
-
-        val queue = Volley.newRequestQueue(this@MainActivity)
-        
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET,
-            url,
-            null, {
-                fun onResponse(response: JSONObject) {
-                    try {
-                        val botResponse = response.getString("cnt")
-                        messageModelArrayList.add(MessageModel(botResponse, BOT_KEY))
-
-                        messageAdapter?.notifyDataSetChanged()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-
-
-                        messageModelArrayList.add(MessageModel("No response", BOT_KEY))
-                        messageAdapter?.notifyDataSetChanged()
-                    }
-                }
-            }, object : Response.ErrorListener {
-                override fun onErrorResponse(error: VolleyError?) {
-                    // error handling.
-                    messageModelArrayList.add(MessageModel("Sorry no response found", BOT_KEY))
-                    Toast.makeText(
-                        this@MainActivity,
-                        "No response from the bot..",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-
-        queue.add(jsonObjectRequest)
-    }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

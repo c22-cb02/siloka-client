@@ -16,11 +16,21 @@ class MessageAdapter(private val messageModelArrayList: ArrayList<MessageModel>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
-        if(viewType == 0){
-            view = LayoutInflater.from(parent.context).inflate(R.layout.user_msg, parent, false)
+        when (viewType) {
+            0 -> {
+                view = LayoutInflater.from(parent.context).inflate(R.layout.user_msg, parent, false)
 
-        }else{
+            }
+            1-> {
+                view = LayoutInflater.from(parent.context).inflate(R.layout.bot_msg, parent, false)
+            }2 -> {
             view = LayoutInflater.from(parent.context).inflate(R.layout.bot_msg, parent, false)
+            }3-> {
+            view = LayoutInflater.from(parent.context).inflate(R.layout.bot_msg, parent, false)
+            }
+            else -> {
+            view = LayoutInflater.from(parent.context).inflate(R.layout.bot_msg, parent, false)
+            }
         }
         return ViewHolder(view)
     }
