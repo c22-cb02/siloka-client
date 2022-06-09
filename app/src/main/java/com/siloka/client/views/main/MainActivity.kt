@@ -31,6 +31,9 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+
+    private var userMsgEdt: EditText? = null
     private val USER_KEY = "user"
     private val BOT_KEY = "bot"
     private val listTopics = ArrayList<Topic>()
@@ -76,9 +79,11 @@ class MainActivity : AppCompatActivity() {
 
                 sendMessage(binding.edChat.text.toString())
 
-                binding.edChat.setText("")
+                userMsgEdt!!.setText("")
+
 
                 messageAdapter = MessageAdapter(messageModelArrayList, this@MainActivity)
+
 
                 val linearLayoutManager =
                     LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
@@ -95,6 +100,34 @@ class MainActivity : AppCompatActivity() {
         messageModelArrayList.add(MessageModel(userMsg, USER_KEY))
         messageAdapter?.notifyDataSetChanged()
 
+        val url = "Enter you API URL here$userMsg"
+
+        val queue = Volley.newRequestQueue(this@MainActivity)
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET,
+            url,
+            null, {
+                try {
+                    val botResponse = it.getString("cnt")
+                    messageModelArrayList.add(MessageModel(botResponse, BOT_KEY))
+
+                    messageAdapter?.notifyDataSetChanged()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+
+                    messageModelArrayList.add(MessageModel("No response", BOT_KEY))
+                    messageAdapter?.notifyDataSetChanged()
+                }
+            }
+        ) { // error handling.
+            messageModelArrayList.add(MessageModel("Sorry no response found", BOT_KEY))
+            Toast.makeText(
+                this@MainActivity,
+                "No response from the bot..",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
       //Implement Wiring yang di Dicoding aja
     }
 
