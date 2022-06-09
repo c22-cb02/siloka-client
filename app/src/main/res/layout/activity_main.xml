@@ -43,22 +43,21 @@
             android:top="2dp">
 
             <EditText
-                style="@style/Siloka.TextInputEditText.Style"
                 android:id="@+id/et_chatbox"
+                style="@style/Siloka.TextInputEditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
-                android:hint="@string/et_chatbox_hint"
-                tools:ignore="TextContrastCheck"
-                android:inputType="textMultiLine"
-                android:importantForAutofill="no" />
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="4dp"
                 android:background="#ffffff"
-                android:minHeight="40dp"
-                android:textSize="16sp" />
+                android:hint="@string/et_chatbox_hint"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:minHeight="32dp"
+                android:textSize="16sp"
+                tools:ignore="TextContrastCheck" />
         </RelativeLayout>
 
         <RelativeLayout
