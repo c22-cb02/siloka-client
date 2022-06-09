@@ -22,6 +22,8 @@ import com.siloka.client.R
 import com.siloka.client.adapter.MessageAdapter
 import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.ActivityMainBinding
+import com.siloka.client.views.adapter.ShortcutAdapter
+import com.siloka.client.views.entity.Topic
 import com.siloka.client.views.settings.SettingsActivity
 import org.json.JSONException
 import org.json.JSONObject
@@ -29,12 +31,9 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    private var chatsRV: RecyclerView? = null
-    private var sendMsgIB: ImageButton? = null
-    private var userMsgEdt: EditText? = null
     private val USER_KEY = "user"
     private val BOT_KEY = "bot"
+    private val listTopics = ArrayList<Topic>()
 
     private var mRequestQueue: RequestQueue? = null
 
@@ -56,12 +55,16 @@ class MainActivity : AppCompatActivity() {
 
         // creating a new array list
         messageModelArrayList = ArrayList()
-        userMsgEdt?.setText("")
+        binding.edChat.setText("")
         // adding on click listener for send message button.
 
-        sendMsgIB?.setOnClickListener(object : View.OnClickListener {
+        //harus dibikin flag dulu
+        showShortcut()
+
+
+        binding.sendButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                if (userMsgEdt!!.text.toString().isEmpty()) {
+                if (binding.edChat.text.toString().isEmpty()) {
                     // if the edit text is empty display a toast message.
                     Toast.makeText(
                         this@MainActivity,
@@ -71,19 +74,18 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
 
-                sendMessage(userMsgEdt!!.text.toString())
+                sendMessage(binding.edChat.text.toString())
 
-                userMsgEdt!!.setText("")
+                binding.edChat.setText("")
 
                 messageAdapter = MessageAdapter(messageModelArrayList, this@MainActivity)
 
                 val linearLayoutManager =
                     LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
 
+                binding.rvChat.layoutManager = linearLayoutManager
 
-                chatsRV?.layoutManager = linearLayoutManager
-
-                chatsRV?.adapter = messageAdapter
+                binding.rvChat.adapter = messageAdapter
             }
         })
     }
@@ -93,36 +95,14 @@ class MainActivity : AppCompatActivity() {
         messageModelArrayList.add(MessageModel(userMsg, USER_KEY))
         messageAdapter?.notifyDataSetChanged()
 
-        val url = "Enter you API URL here$userMsg"
+      //Implement Wiring yang di Dicoding aja
+    }
 
-        val queue = Volley.newRequestQueue(this@MainActivity)
-
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET,
-            url,
-            null, {
-                try {
-                    val botResponse = it.getString("cnt")
-                    messageModelArrayList.add(MessageModel(botResponse, BOT_KEY))
-
-                    messageAdapter?.notifyDataSetChanged()
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-
-                    messageModelArrayList.add(MessageModel("No response", BOT_KEY))
-                    messageAdapter?.notifyDataSetChanged()
-                }
-            }
-        ) { // error handling.
-            messageModelArrayList.add(MessageModel("Sorry no response found", BOT_KEY))
-            Toast.makeText(
-                this@MainActivity,
-                "No response from the bot..",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        queue.add(jsonObjectRequest)
+    private fun showShortcut() {
+        val linearLayoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+        binding.rvChat.layoutManager = linearLayoutManager
+        val listHeroAdapter = ShortcutAdapter(listTopics)
+        binding.rvChat.adapter = listHeroAdapter
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

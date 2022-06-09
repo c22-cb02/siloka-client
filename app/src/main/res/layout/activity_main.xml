@@ -46,13 +46,13 @@
                 android:layout_width="293dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="2dp"
-                android:background="#0ffffff"
+                android:layout_marginBottom="5dp"
+                android:background="#ffffff"
                 android:hint="Type a Message"
-                android:minHeight="50dp"
-                android:textSize="18sp" />
+                android:minHeight="40dp"
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -67,7 +67,7 @@
             android:elevation="4dp">
 
             <ImageView
-                android:id="@+id/fab_img"
+                android:id="@+id/send_button"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerInParent="true"
