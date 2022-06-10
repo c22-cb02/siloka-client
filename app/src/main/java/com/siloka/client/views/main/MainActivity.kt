@@ -30,16 +30,6 @@ class MainActivity : AppCompatActivity() {
 
 //    private var mRequestQueue: RequestQueue? = null
 
-    private var chatsRV: RecyclerView? = null
-    private var sendMsgIB: ImageButton? = null
-    private var userMsgEdt: EditText? = null
-
-    private var mRequestQueue: RequestQueue? = null
-
-    // creating a variable for array list and adapter class.
-    private lateinit var messageModelArrayList: ArrayList<MessageModel>
-    private var messageAdapter: MessageAdapter? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)

@@ -29,6 +29,8 @@
         <entry key="app/src/main/res/layout/topic.xml" value="0.12916666666666668" />
         <entry key="app/src/main/res/layout/user_msg.xml" value="0.14764492753623187" />
         <entry key="app/src/main/res/layout/user_sent_message.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15208333333333332" />
       </map>
     </option>
   </component>
