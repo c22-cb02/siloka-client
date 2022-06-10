@@ -20,11 +20,12 @@
         <entry key="app/src/main/res/drawable/bg_type.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/bg_user.xml" value="0.199" />
         <entry key="app/src/main/res/font/museo_sans_300.xml" value="0.2712962962962963" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout-v28/bot_msg.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
-        <entry key="app/src/main/res/layout/bot_msg.xml" value="3.1063374932390166" />
+        <entry key="app/src/main/res/layout/bot_msg.xml" value="1.7902097902097902" />
         <entry key="app/src/main/res/layout/response_feedback.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/shortcut_hc.xml" value="0.6984511799120415" />
         <entry key="app/src/main/res/layout/shortcut_msg.xml" value="0.23404166121098258" />

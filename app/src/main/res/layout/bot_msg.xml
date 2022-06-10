@@ -28,6 +28,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:maxWidth="200dp"
+                android:lineSpacingMultiplier="1.25"
                 android:textColor="@color/white"
                 tools:text="Bot message" />
 
