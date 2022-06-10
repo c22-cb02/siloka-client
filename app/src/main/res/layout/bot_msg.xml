@@ -11,9 +11,11 @@
         android:gravity="start"
         android:layout_margin="5dp"
         android:elevation="8dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="24dp">
 
         <LinearLayout
+            android:paddingVertical="6dp"
+            android:paddingHorizontal="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -21,14 +23,13 @@
 
             <TextView
                 android:id="@+id/tv_bot_msg"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:padding="3dp"
-                tools:text="Bot message"
-                android:maxWidth="240dp"
-                android:textColor="@color/white" />
+                android:maxWidth="200dp"
+                android:textColor="@color/white"
+                tools:text="Bot message" />
 
         </LinearLayout>
 

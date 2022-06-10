@@ -24,7 +24,9 @@
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
-        <entry key="app/src/main/res/layout/bot_msg.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout/bot_msg.xml" value="3.1063374932390166" />
+        <entry key="app/src/main/res/layout/response_feedback.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/shortcut_hc.xml" value="0.6984511799120415" />
         <entry key="app/src/main/res/layout/shortcut_msg.xml" value="0.23404166121098258" />
         <entry key="app/src/main/res/layout/topic.xml" value="0.12916666666666668" />
         <entry key="app/src/main/res/layout/user_msg.xml" value="0.14764492753623187" />
