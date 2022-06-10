@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-
+    id 'kotlin-parcelize'
     // Firebase-related plugins
     id 'com.google.firebase.appdistribution'
     id 'com.google.gms.google-services'
@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.2"
 
     // Coroutines-related dependencies
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'

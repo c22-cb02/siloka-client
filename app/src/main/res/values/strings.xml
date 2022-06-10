@@ -29,6 +29,8 @@
 
     <!-- Chatroom -->
     <string name="popular_topics">Popular Topics</string>
+    <string name="et_chatbox_hint">Type a Message</string>
+    <string name="fab_send_chat_img_alt">Send Message</string>
     <string name="are_you_satisfied_with_the_answer">Are you satisfied with the answer?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
