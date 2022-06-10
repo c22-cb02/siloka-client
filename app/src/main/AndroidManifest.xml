@@ -24,6 +24,7 @@
             android:exported="false" />
         <activity
             android:name=".views.splashscreen.SplashScreenActivity"
+            android:theme="@style/Siloka.RemoveSplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

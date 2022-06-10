@@ -51,4 +51,9 @@
         <item name="colorOnSurface">@color/gray_500</item>
         <item name="colorError">@color/pink_500</item>
     </style>
+
+    <!--  Override Android 12 API SplashScreen  -->
+    <style name="Siloka.RemoveSplashScreen" parent="@style/Theme.Siloka">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>
