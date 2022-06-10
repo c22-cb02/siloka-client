@@ -32,6 +32,7 @@
                 android:maxWidth="200dp"
                 android:textIsSelectable="true"
                 android:lineSpacingMultiplier="1.25"
+                android:fontFamily="@font/inter_400"
                 android:textColor="@color/blue_500"
                 tools:ignore="TextContrastCheck"
                 tools:text="User message" />
