@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     fun sendMessage(userMsg: String) {
         messageAdapter.insertMessage(MessageModel(1, userMsg))
+        binding.rvChatroom.scrollToPosition(messageAdapter.messagesList.size - 1)
 
 //        val url = "Enter you API URL here$userMsg"
 //        val queue = Volley.newRequestQueue(this@MainActivity)

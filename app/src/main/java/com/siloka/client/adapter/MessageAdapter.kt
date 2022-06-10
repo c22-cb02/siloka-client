@@ -17,7 +17,7 @@ class MessageAdapter (
     private val context: Context
 ): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    private var messagesList = mutableListOf<MessageModel>()
+    var messagesList = mutableListOf<MessageModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val binding: ViewBinding = when (viewType) {
