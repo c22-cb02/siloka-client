@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chatroom"
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
         android:paddingBottom="50dp" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -41,19 +43,21 @@
             android:top="2dp">
 
             <EditText
-                style="@style/Siloka.TextInputEditText.Style"
                 android:id="@+id/et_chatbox"
+                style="@style/Siloka.TextInputEditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="#fff"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="4dp"
+                android:background="#ffffff"
                 android:hint="@string/et_chatbox_hint"
-                android:minHeight="50dp"
-                android:textSize="18sp"
-                tools:ignore="TextContrastCheck"
+                android:importantForAutofill="no"
                 android:inputType="textMultiLine"
-                android:importantForAutofill="no" />
+                android:minHeight="32dp"
+                android:textSize="16sp"
+                tools:ignore="TextContrastCheck" />
         </RelativeLayout>
 
         <RelativeLayout
