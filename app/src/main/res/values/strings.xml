@@ -40,8 +40,8 @@
     <string name="option_setting">Setting</string>
 
     <!--Topics-->
-    <string name="how_to_reschedule_a_flight_booking">💬 How to Reschedule a Flight Booking</string>
-    <string name="how_to_cancel_and_refund_a_flight_booking">💬 How to Cancel and Refund a Flight Booking</string>
-    <string name="how_to_check_in_online">💬 How To Check In Online</string>
-    <string name="how_to_correct_flight_passenger_name">💬 How To Correct Flight Passenger Name</string>
+    <string name="how_to_reschedule_a_flight_booking">How to Reschedule a Flight Booking?</string>
+    <string name="how_to_cancel_and_refund_a_flight_booking">How to Cancel and Refund a Flight Booking?</string>
+    <string name="how_to_check_in_online">How To Check In Online?</string>
+    <string name="how_to_correct_flight_passenger_name">How To Correct Flight Passenger Name?</string>
 </resources>

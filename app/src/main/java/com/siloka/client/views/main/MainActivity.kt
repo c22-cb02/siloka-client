@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     private fun bindRV() {
-        messageAdapter = MessageAdapter()
+        messageAdapter = MessageAdapter(this@MainActivity)
         rvChatroom = binding.rvChatroom
         rvChatroom?.adapter = messageAdapter
         rvChatroom?.layoutManager = LinearLayoutManager(applicationContext)
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             MessageModel(2, null))
     }
 
-    private fun sendMessage(userMsg: String) {
+    fun sendMessage(userMsg: String) {
         messageAdapter.insertMessage(MessageModel(1, userMsg))
 
 //        val url = "Enter you API URL here$userMsg"

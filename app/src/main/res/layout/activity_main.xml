@@ -69,7 +69,7 @@
         android:background="@color/transparent_white"
         android:clipToPadding="false"
         android:paddingTop="72dp"
-        android:paddingBottom="52dp"
+        android:paddingBottom="80dp"
         android:paddingHorizontal="10dp"
         android:scrollbars="vertical"
         tools:layout_editor_absoluteX="0dp"
@@ -80,12 +80,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:paddingVertical="4dp"
+        android:paddingVertical="3dp"
         android:background="@color/gray_200"
         app:layout_constraintBottom_toBottomOf="@+id/rv_chatroom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
 
         <RelativeLayout
             android:layout_width="match_parent"

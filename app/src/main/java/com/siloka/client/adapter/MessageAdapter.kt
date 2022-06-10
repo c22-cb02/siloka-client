@@ -1,5 +1,6 @@
 package com.siloka.client.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +10,12 @@ import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.BotMsgBinding
 import com.siloka.client.databinding.ShortcutHcBinding
 import com.siloka.client.databinding.UserMsgBinding
+import com.siloka.client.utilities.showToast
+import com.siloka.client.views.main.MainActivity
 
-class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
+class MessageAdapter (
+    private val context: Context
+): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     private var messagesList = mutableListOf<MessageModel>()
 
@@ -47,7 +52,7 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
                 false
             )
         }
-        return MessageViewHolder(binding)
+        return MessageViewHolder(binding, context)
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
@@ -76,6 +81,7 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     inner class MessageViewHolder(
         private val binding: ViewBinding,
+        private val context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bindBotMsg(message: MessageModel) {
             (binding as BotMsgBinding).tvBotMsg.text = message.message
@@ -86,7 +92,20 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
         }
 
         fun bindShortcutHc() {
-            return
+            (binding as ShortcutHcBinding).apply {
+                tvTopic1.setOnClickListener {
+                    (context as MainActivity).sendMessage(tvTopic1.text.toString())
+                }
+                tvTopic2.setOnClickListener {
+                    (context as MainActivity).sendMessage(tvTopic2.text.toString())
+                }
+                tvTopic3.setOnClickListener {
+                    (context as MainActivity).sendMessage(tvTopic3.text.toString())
+                }
+                tvTopic4.setOnClickListener {
+                    (context as MainActivity).sendMessage(tvTopic4.text.toString())
+                }
+            }
         }
     }
 }
