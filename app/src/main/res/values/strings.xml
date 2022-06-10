@@ -29,10 +29,10 @@
     <string name="settings_desc">Tell Si Loka how do you \nprefer to be addressed</string>
 
     <!-- Chatroom -->
-    <string name="popular_topics">Popular Topics</string>
-    <string name="et_chatbox_hint">Type a Message</string>
+    <string name="popular_topics">Pick one of the popular topics below!</string>
+    <string name="et_chatbox_hint">Ask a question</string>
     <string name="fab_send_chat_img_alt">Send Message</string>
-    <string name="are_you_satisfied_with_the_answer">Are you satisfied with the answer?</string>
+    <string name="tv_feedback_label">Are you satisfied with the answer?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
 

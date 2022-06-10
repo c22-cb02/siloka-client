@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.BotMsgBinding
+import com.siloka.client.databinding.ShortcutHcBinding
 import com.siloka.client.databinding.UserMsgBinding
-import com.siloka.client.views.main.MainActivity
 
 class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
@@ -16,12 +16,32 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val binding: ViewBinding = when (viewType) {
-            0 -> BotMsgBinding.inflate(
+            1 -> UserMsgBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            else -> UserMsgBinding.inflate(
+            2 -> ShortcutHcBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            3 -> BotMsgBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            4 -> BotMsgBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            5 -> BotMsgBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            else -> BotMsgBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -33,8 +53,12 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val messageObj: MessageModel = messagesList[position]
         when (messageObj.viewType) {
-            0 -> holder.bindBotMsg(messageObj)
-            else -> holder.bindUserMsg(messageObj)
+            1 -> holder.bindUserMsg(messageObj)
+            2 -> holder.bindShortcutHc()
+            3 -> holder.bindUserMsg(messageObj)
+            4 -> holder.bindUserMsg(messageObj)
+            5 -> holder.bindUserMsg(messageObj)
+            else -> holder.bindBotMsg(messageObj)
         }
     }
 
@@ -59,6 +83,10 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
         fun bindUserMsg(message: MessageModel) {
             (binding as UserMsgBinding).tvUserMsg.text = message.message
+        }
+
+        fun bindShortcutHc() {
+            return
         }
     }
 }

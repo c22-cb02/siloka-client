@@ -11,8 +11,7 @@ package com.siloka.client.data.models
 
 data class MessageModel (
     var viewType: Int,
-    var message: String,
-    var sender: String
+    var message: String?,
 )
 
 

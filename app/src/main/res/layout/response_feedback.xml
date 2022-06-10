@@ -15,7 +15,7 @@
         android:maxWidth="240dp"
         android:padding="3dp"
         android:textAlignment="center"
-        tools:text="@string/are_you_satisfied_with_the_answer"
+        tools:text="@string/tv_feedback_label"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
 

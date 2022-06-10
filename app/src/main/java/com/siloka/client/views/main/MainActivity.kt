@@ -84,19 +84,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setInitialMessages() {
         messageAdapter.insertMessage(
-            MessageModel(0, "ayo dong bantai kami", BOT_KEY))
+            MessageModel(0, "Hi, Brodie! I'm Siloka, nice to meet you!"))
         messageAdapter.insertMessage(
-            MessageModel(1, "kalo elo punya nyali", USER_KEY))
+            MessageModel(0, "Let me help you find something you need."))
         messageAdapter.insertMessage(
-            MessageModel(0, "tongkronang kami bukan tongrkongan pecundang", BOT_KEY))
+            MessageModel(0, "Choose any of the options below, or type your problem on the chatbox!"))
         messageAdapter.insertMessage(
-            MessageModel(1, "pecundang", BOT_KEY))
-        messageAdapter.insertMessage(
-            MessageModel(1, "pecundang", BOT_KEY))
+            MessageModel(2, null))
     }
 
     private fun sendMessage(userMsg: String) {
-        messageAdapter.insertMessage(MessageModel(1, userMsg, USER_KEY))
+        messageAdapter.insertMessage(MessageModel(1, userMsg))
 
 //        val url = "Enter you API URL here$userMsg"
 //        val queue = Volley.newRequestQueue(this@MainActivity)
@@ -107,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 //            null, {
 //                try {
 //                    val botResponse = it.getString("cnt")
-//                    messagesList.add(MessageModel(0, botResponse, BOT_KEY))
+//                    messagesList.add(MessageModel(0, botResponse))
 //                    messageAdapter?.notifyItemInserted(messagesList.size - 1)
 //                } catch (e: JSONException) {
 //                    e.printStackTrace()
@@ -152,10 +150,5 @@ class MainActivity : AppCompatActivity() {
             }
             else -> true
         }
-    }
-
-    companion object {
-        private const val USER_KEY = "user"
-        const val BOT_KEY = "siloka"
     }
 }

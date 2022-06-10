@@ -70,7 +70,7 @@
         android:clipToPadding="false"
         android:paddingTop="72dp"
         android:paddingBottom="52dp"
-        android:paddingHorizontal="5dp"
+        android:paddingHorizontal="10dp"
         android:scrollbars="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="37dp" />
@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
             android:layout_toStartOf="@+id/btn_send_chat"
@@ -121,7 +121,7 @@
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/sendbutton"
             android:elevation="4dp">
