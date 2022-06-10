@@ -1,6 +1,7 @@
 <resources>
     <!--  Common  -->
     <string name="app_name">Siloka</string>
+    <string name="si_loka">Si Loka</string>
     <string name="siloka">siloka</string>
     <string name="siloka_colored">
         <font color="#000000">si</font><font color="#39C4F3">loka</font>
@@ -34,6 +35,9 @@
     <string name="are_you_satisfied_with_the_answer">Are you satisfied with the answer?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+
+    <!--  Chatroom Toolbar & Option Menu  -->
+    <string name="option_setting">Setting</string>
 
     <!--Topics-->
     <string name="how_to_reschedule_a_flight_booking">💬 How to Reschedule a Flight Booking</string>
