@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView"
@@ -15,16 +15,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/bg_popular"
             android:maxWidth="240dp"
             android:padding="3dp"
             android:text="@string/popular_topics"
             android:textColor="@color/white"
-            tools:layout_editor_absoluteX="91dp"
-            tools:layout_editor_absoluteY="26dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/topic1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -32,14 +37,14 @@
             android:background="@drawable/bg_topic"
             android:maxWidth="240dp"
             android:padding="3dp"
-            android:text="How to Reschedule a Flight Booking"
+            android:text="@string/how_to_reschedule_a_flight_booking"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/topic2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -47,14 +52,14 @@
             android:background="@drawable/bg_topic"
             android:maxWidth="240dp"
             android:padding="3dp"
-            android:text="How to Cancel and Refund a Flight Booking"
+            android:text="@string/how_to_cancel_and_refund_a_flight_booking"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintEnd_toEndOf="@+id/topic1"
+            app:layout_constraintStart_toStartOf="@+id/topic1"
+            app:layout_constraintTop_toBottomOf="@+id/topic1" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/topic3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -62,14 +67,14 @@
             android:background="@drawable/bg_topic"
             android:maxWidth="240dp"
             android:padding="3dp"
-            android:text="How To Check In Online"
+            android:text="@string/how_to_check_in_online"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintEnd_toEndOf="@+id/topic2"
+            app:layout_constraintStart_toStartOf="@+id/topic2"
+            app:layout_constraintTop_toBottomOf="@+id/topic2" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/topic4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -77,13 +82,12 @@
             android:background="@drawable/bg_topic"
             android:maxWidth="240dp"
             android:padding="3dp"
-            android:text="How To Correct Flight Passenger Name"
+            android:text="@string/how_to_correct_flight_passenger_name"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintEnd_toEndOf="@+id/topic3"
+            app:layout_constraintStart_toStartOf="@+id/topic3"
+            app:layout_constraintTop_toBottomOf="@+id/topic3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.cardview.widget.CardView>
