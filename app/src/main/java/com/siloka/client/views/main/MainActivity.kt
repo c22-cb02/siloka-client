@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
     private var ibSendMessage: RelativeLayout? = null
     private var etChatbox: EditText? = null
 
+    private lateinit var popularTopicsMsgObj: MessageModel
+    private lateinit var responseFeedbackMsgObj: MessageModel
+    private lateinit var directToCsMsgObj: MessageModel
+    private lateinit var loadingMsgObj: MessageModel
+
 //    private var mRequestQueue: RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         setHeader()
+        setFixedMessages()
         bindRV()
         bindChatbox()
     }
@@ -47,6 +53,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF39C4F3")))
+    }
+
+    private fun setFixedMessages() {
+        popularTopicsMsgObj = MessageModel(2, null)
+        responseFeedbackMsgObj = MessageModel(3, null)
+        directToCsMsgObj = MessageModel(4, null)
+        loadingMsgObj = MessageModel(5, null)
     }
 
 //    private fun setRequestQueue() {
@@ -91,8 +104,7 @@ class MainActivity : AppCompatActivity() {
             MessageModel(0, "Let me help you find something you need."))
         messageAdapter.insertMessage(
             MessageModel(0, "Choose any of the options below, or type your problem on the chatbox!"))
-        messageAdapter.insertMessage(
-            MessageModel(2, null))
+        messageAdapter.insertMessage(popularTopicsMsgObj)
     }
 
     fun sendMessage(userMsg: String) {
@@ -130,6 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showResponse() {
+        setLoading(true)
         messageAdapter.insertMessage(
             MessageModel(
                 0,
@@ -148,20 +161,25 @@ class MainActivity : AppCompatActivity() {
                 """
             ))
         scrollToLatestMessage()
+        setLoading(false)
 
+        setLoading(true)
         Handler(Looper.getMainLooper())
             .postDelayed({
-                messageAdapter.insertMessage(MessageModel(3, null))
+                messageAdapter.insertMessage(responseFeedbackMsgObj)
                 scrollToLatestMessage()
             }, 1000)
+        setLoading(false)
     }
 
     private fun showDirectToCSPrompt() {
+        setLoading(true)
         Handler(Looper.getMainLooper())
             .postDelayed({
-                messageAdapter.insertMessage(MessageModel(4, null))
+                messageAdapter.insertMessage(directToCsMsgObj)
                 scrollToLatestMessage()
             }, 1000)
+        setLoading(false)
     }
 
     fun sendFeedback(isResponseOk: Boolean) {
@@ -171,14 +189,17 @@ class MainActivity : AppCompatActivity() {
             }
             false -> {
                 messageAdapter.insertMessage(MessageModel(1, "No"))
-                showDirectToCSPrompt()
+                Handler(Looper.getMainLooper())
+                    .postDelayed({
+                        showDirectToCSPrompt()
+                    }, 1000)
             }
         }
         scrollToLatestMessage()
     }
 
-    fun sendToCS(isSendToCS: Boolean) {
-        when(isSendToCS) {
+    fun sendToCs(isSendToCs: Boolean) {
+        when(isSendToCs) {
             true -> {
                 messageAdapter.insertMessage(MessageModel(1, "Yes"))
             }
@@ -187,6 +208,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
         scrollToLatestMessage()
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        when (isLoading) {
+            true -> {
+                messageAdapter.insertMessage(loadingMsgObj)
+                scrollToLatestMessage()
+            }
+            false -> {
+                Handler(Looper.getMainLooper())
+                    .postDelayed({
+                        messageAdapter.removeMessage(loadingMsgObj)
+                        scrollToLatestMessage()
+                    }, 1000)
+            }
+        }
     }
 
     private fun scrollToLatestMessage() {

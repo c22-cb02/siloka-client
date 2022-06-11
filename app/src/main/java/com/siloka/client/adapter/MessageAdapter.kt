@@ -14,7 +14,7 @@ class MessageAdapter (
     private val context: Context
 ): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    var messagesList = mutableListOf<MessageModel>()
+    private var messagesList = mutableListOf<MessageModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val binding: ViewBinding = when (viewType) {
@@ -38,7 +38,7 @@ class MessageAdapter (
                 parent,
                 false
             )
-            5 -> BotMsgBinding.inflate(
+            5 -> BotLoadingBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -59,7 +59,7 @@ class MessageAdapter (
             2 -> holder.bindShortcutHc()
             3 -> holder.bindResponseFeedback()
             4 -> holder.bindDirectToCs()
-            5 -> holder.bindUserMsg(messageObj)
+            5 -> holder.bindBotLoading()
             else -> holder.bindBotMsg(messageObj)
         }
     }
@@ -76,14 +76,16 @@ class MessageAdapter (
         notifyItemInserted(messagesList.size)
     }
 
+    fun removeMessage(message: MessageModel) {
+        val messagePosition = messagesList.indexOf(message)
+        this.messagesList.removeAt(messagePosition)
+        notifyItemRemoved(messagePosition)
+    }
+
     inner class MessageViewHolder(
         private val binding: ViewBinding,
         private val context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bindBotMsg(message: MessageModel) {
-            (binding as BotMsgBinding).tvBotMsg.text = message.message
-        }
-
         fun bindUserMsg(message: MessageModel) {
             (binding as UserMsgBinding).tvUserMsg.text = message.message
         }
@@ -119,12 +121,20 @@ class MessageAdapter (
         fun bindDirectToCs() {
             (binding as DirectToCsBinding).apply {
                 btnPromptYes.setOnClickListener {
-                    (context as MainActivity).sendToCS(true)
+                    (context as MainActivity).sendToCs(true)
                 }
                 btnPromptNo.setOnClickListener {
-                    (context as MainActivity).sendToCS(false)
+                    (context as MainActivity).sendToCs(false)
                 }
             }
+        }
+
+        fun bindBotMsg(message: MessageModel) {
+            (binding as BotMsgBinding).tvBotMsg.text = message.message
+        }
+
+        fun bindBotLoading() {
+            return
         }
     }
 }
