@@ -8,6 +8,8 @@
     </string>
     <string name="traveloka">traveloka</string>
     <string name="traveloka_logo_cd">Traveloka Logo</string>
+    <string name="err_server">Oops! Some mishaps on our server</string>
+    <string name="err_client">Oops! Some mishaps on our side</string>
 
     <!--  Splash Screen  -->
     <string name="app_desc">a support center app by</string>

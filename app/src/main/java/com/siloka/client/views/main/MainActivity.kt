@@ -100,22 +100,26 @@ class MainActivity : AppCompatActivity() {
     private fun getRoomId() {
         val getRoomIdRequest = JsonObjectRequest(
             Request.Method.GET,
-            "${LOCAL_API_URL}${GET_ROOMID_PATH}",
+            "${BASE_API_URL}${GET_ROOMID_PATH}",
             null,
             {
                 try {
                     roomId = it.getString("room_id")
-                    Log.d(Log.INFO.toString(), "ROOM ID UDAH DAPET $roomId")
+                    Log.i("SILOKA", "Successfully acquired room_id: $roomId")
+
+                    // Only render greetings and poptop
+                    // once roomId is set
+                    setInitialMessages()
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                    Log.e(Log.ERROR.toString(), "ROOM gmn nih ga dapet", e)
-                    showToast(this, it.getString("message"))
+                    Log.e("SILOKA", "Error parsing room_id data", e)
+                    showToast(this, getString(R.string.err_client))
                 }
             }
         ) {
             it.printStackTrace()
-            Log.e(Log.ERROR.toString(), "ASD ROOM gmn nih ga dapet", it)
-            showToast(this, it.message.toString())
+            Log.e("SILOKA", "Error on acquiring response from server", it)
+            showToast(this, getString(R.string.err_server))
         }
 
         mRequestQueue.add(getRoomIdRequest)
@@ -126,8 +130,6 @@ class MainActivity : AppCompatActivity() {
         rvChatroom = binding.rvChatroom
         rvChatroom?.adapter = messageAdapter
         rvChatroom?.layoutManager = LinearLayoutManager(applicationContext)
-
-        setInitialMessages()
     }
 
     private fun bindChatbox() {
@@ -167,9 +169,14 @@ class MainActivity : AppCompatActivity() {
         messageAdapter.insertMessage(MessageModel(USER_MESSAGE, userMsg))
         scrollToLatestMessage()
 
+        if (!this::roomId.isInitialized) {
+            showToast(this, "Error on connecting with our server")
+            return
+        }
+
         val postUserMessageRequest = JsonObjectRequest(
             Request.Method.POST,
-            "${LOCAL_API_URL}${POST_MESSAGE_PATH}",
+            "${BASE_API_URL}${POST_MESSAGE_PATH}",
             JSONObject(
                 mutableMapOf(
                     "room_id" to roomId,
@@ -184,16 +191,17 @@ class MainActivity : AppCompatActivity() {
                             it.getString("message"),
                         )
                     )
+                    Log.i("SILOKA", "Successfully posted message & get bot response")
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                    Log.e(Log.ERROR.toString(), "Gagal post query", e)
-                    showToast(this, it.getString("message"))
+                    Log.e("SILOKA", "Error on parsing JSON", e)
+                    showToast(this, getString(R.string.err_client))
                 }
             },
         ) {
             it.printStackTrace()
-            Log.e(Log.ERROR.toString(), "Gagal post query", it)
-            showToast(this, it.message.toString())
+            Log.e("SILOKA", "Error on acquiring response from server", it)
+            showToast(this, getString(R.string.err_server))
         }
 
         mRequestQueue.add(postUserMessageRequest)
@@ -210,13 +218,13 @@ class MainActivity : AppCompatActivity() {
         scrollToLatestMessage()
         setLoading(false)
 
-        setLoading(true)
         Handler(Looper.getMainLooper())
             .postDelayed({
+                setLoading(true)
                 messageAdapter.insertMessage(responseFeedbackMsgObj)
                 scrollToLatestMessage()
+                setLoading(false)
             }, 1000)
-        setLoading(false)
     }
 
     private fun showDirectToCSPrompt() {
@@ -259,18 +267,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setLoading(isLoading: Boolean) {
         when (isLoading) {
-            true -> {
-                messageAdapter.insertMessage(loadingMsgObj)
-                scrollToLatestMessage()
-            }
-            false -> {
-                Handler(Looper.getMainLooper())
-                    .postDelayed({
-                        messageAdapter.removeMessage(loadingMsgObj)
-                        scrollToLatestMessage()
-                    }, 1000)
-            }
+            true -> messageAdapter.insertMessage(loadingMsgObj)
+            false -> messageAdapter.removeMessage(loadingMsgObj)
         }
+        scrollToLatestMessage()
     }
 
     private fun scrollToLatestMessage() {
@@ -312,8 +312,7 @@ class MainActivity : AppCompatActivity() {
         private const val DIRECT_TO_CS_PROMPT = 4
         private const val LOADING_MESSAGE = 5
 
-        private const val BASE_API_URL = "http://34.87.1.81"
-        private const val LOCAL_API_URL = "http://192.168.1.5:3000"
+        private const val BASE_API_URL = "http://35.240.219.237"
         private const val GET_ROOMID_PATH = "/generate-roomid"
         private const val POST_MESSAGE_PATH = "/message"
     }
