@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,13 +21,20 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.siloka.client.R
 import com.siloka.client.adapter.MessageAdapter
 import com.siloka.client.data.models.MessageModel
 import com.siloka.client.data.preferences.UserPreferences
 import com.siloka.client.databinding.ActivityMainBinding
+import com.siloka.client.utilities.showToast
 import com.siloka.client.views.ViewModelFactory
 import com.siloka.client.views.settings.SettingsActivity
+import org.json.JSONException
+import org.json.JSONObject
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 
@@ -44,7 +52,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var directToCsMsgObj: MessageModel
     private lateinit var loadingMsgObj: MessageModel
 
-//    private var mRequestQueue: RequestQueue? = null
+    private lateinit var roomId: String
+    private lateinit var mRequestQueue: RequestQueue
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -56,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         setHeader()
         setViewModel()
         setFixedMessages()
+        setRequestQueue()
+        getRoomId()
 
         bindRV()
         bindChatbox()
@@ -81,10 +92,34 @@ class MainActivity : AppCompatActivity() {
         loadingMsgObj = MessageModel(LOADING_MESSAGE, null)
     }
 
-//    private fun setRequestQueue() {
-//        mRequestQueue = Volley.newRequestQueue(this@MainActivity)
-//        mRequestQueue!!.cache.clear()
-//    }
+    private fun setRequestQueue() {
+        mRequestQueue = Volley.newRequestQueue(this@MainActivity)
+        mRequestQueue.cache.clear()
+    }
+
+    private fun getRoomId() {
+        val getRoomIdRequest = JsonObjectRequest(
+            Request.Method.GET,
+            "${LOCAL_API_URL}${GET_ROOMID_PATH}",
+            null,
+            {
+                try {
+                    roomId = it.getString("room_id")
+                    Log.d(Log.INFO.toString(), "ROOM ID UDAH DAPET $roomId")
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Log.e(Log.ERROR.toString(), "ROOM gmn nih ga dapet", e)
+                    showToast(this, it.getString("message"))
+                }
+            }
+        ) {
+            it.printStackTrace()
+            Log.e(Log.ERROR.toString(), "ASD ROOM gmn nih ga dapet", it)
+            showToast(this, it.message.toString())
+        }
+
+        mRequestQueue.add(getRoomIdRequest)
+    }
 
     private fun bindRV() {
         messageAdapter = MessageAdapter(this@MainActivity)
@@ -131,56 +166,47 @@ class MainActivity : AppCompatActivity() {
     fun sendMessage(userMsg: String) {
         messageAdapter.insertMessage(MessageModel(USER_MESSAGE, userMsg))
         scrollToLatestMessage()
-        showResponse()
 
-//        val url = "Enter you API URL here$userMsg"
-//        val queue = Volley.newRequestQueue(this@MainActivity)
-//
-//        val jsonObjectRequest = JsonObjectRequest(
-//            Request.Method.GET,
-//            url,
-//            null, {
-//                try {
-//                    val botResponse = it.getString("cnt")
-//                    messagesList.add(MessageModel(BOT_MESSAGE, botResponse))
-//                    messageAdapter?.notifyItemInserted(messagesList.size - 1)
-//                } catch (e: JSONException) {
-//                    e.printStackTrace()
-//                    messagesList.add(MessageModel(BOT_MESSAGE, "No response", BOT_KEY))
-//                    messageAdapter?.notifyItemInserted(messagesList.size - 1)
-//                }
-//            }
-//        ) {
-//            messagesList.add(MessageModel(BOT_MESSAGE,"Sorry no response found", BOT_KEY))
-//            Toast.makeText(
-//                this@MainActivity,
-//                "No response from the bot..",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
-//
-//        queue.add(jsonObjectRequest)
+        val postUserMessageRequest = JsonObjectRequest(
+            Request.Method.POST,
+            "${LOCAL_API_URL}${POST_MESSAGE_PATH}",
+            JSONObject(
+                mutableMapOf(
+                    "room_id" to roomId,
+                    "query" to userMsg
+                ) as Map<String, Any?>
+            ),
+            {
+                try {
+                    showBotResponse(
+                        MessageModel(
+                            it.getInt("viewType") or 0,
+                            it.getString("message"),
+                        )
+                    )
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Log.e(Log.ERROR.toString(), "Gagal post query", e)
+                    showToast(this, it.getString("message"))
+                }
+            },
+        ) {
+            it.printStackTrace()
+            Log.e(Log.ERROR.toString(), "Gagal post query", it)
+            showToast(this, it.message.toString())
+        }
+
+        mRequestQueue.add(postUserMessageRequest)
     }
 
-    private fun showResponse() {
+    private fun showBotResponse(messageObj: MessageModel) {
         setLoading(true)
         messageAdapter.insertMessage(
             MessageModel(
                 BOT_MESSAGE,
-                """To pay for your booking via Indomaret or Alfamart, follow these steps: \n \n \
-
-                1. After you’ve completed your booking details, choose Indomaret or Alfamart on the payment page. \n \
-                2. Tap Pay at Indomaret/Alfamart. \n \
-                3. Go to the nearest Indomaret/Alfamart and show your payment code to the cashier. Then, make the payment. Make sure to ask the cashier for the receipt. \n \
-                4. Once your payment at Indomaret or Alfamart is completed, your Traveloka e-ticket/voucher and receipt will be sent to the email address you used for booking within 60 minutes. \n \n \
-
-                Things to note: \n \n \
-
-                1. For each transaction, Alfamart charges a fee of Rp2.500 while Indomaret charges Rp5.000. \n \
-                2. Payment via Indomaret or Alfamart is only available for transactions amounting up to Rp5.000.000. \n \
-                For further information : https://www.traveloka.com/en-id/help/general-info/general-information-payment/paying-in-idr/how-to-pay-for-my-booking-via-indomaret-or-alfamart
-                """
-            ))
+                messageObj.message
+            )
+        )
         scrollToLatestMessage()
         setLoading(false)
 
@@ -285,5 +311,10 @@ class MainActivity : AppCompatActivity() {
         private const val RESPONSE_FEEDBACK_PROMPT = 3
         private const val DIRECT_TO_CS_PROMPT = 4
         private const val LOADING_MESSAGE = 5
+
+        private const val BASE_API_URL = "http://34.87.1.81"
+        private const val LOCAL_API_URL = "http://192.168.1.5:3000"
+        private const val GET_ROOMID_PATH = "/generate-roomid"
+        private const val POST_MESSAGE_PATH = "/message"
     }
 }

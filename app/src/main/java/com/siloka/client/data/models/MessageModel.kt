@@ -15,6 +15,10 @@ data class MessageModel (
     var message: String?,
 )
 
+data class MessagePayload (
+    var room_id: String,
+    var query: String,
+)
 
 
 
