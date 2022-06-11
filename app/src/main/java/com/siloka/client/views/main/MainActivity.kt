@@ -75,10 +75,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFixedMessages() {
-        popularTopicsMsgObj = MessageModel(2, null)
-        responseFeedbackMsgObj = MessageModel(3, null)
-        directToCsMsgObj = MessageModel(4, null)
-        loadingMsgObj = MessageModel(5, null)
+        popularTopicsMsgObj = MessageModel(POPULAR_TOPICS, null)
+        responseFeedbackMsgObj = MessageModel(RESPONSE_FEEDBACK_PROMPT, null)
+        directToCsMsgObj = MessageModel(DIRECT_TO_CS_PROMPT, null)
+        loadingMsgObj = MessageModel(LOADING_MESSAGE, null)
     }
 
 //    private fun setRequestQueue() {
@@ -119,17 +119,17 @@ class MainActivity : AppCompatActivity() {
     private fun setInitialMessages() {
         viewModel.getUser().observe(this, {
             messageAdapter.insertMessage(
-                MessageModel(0, "Hi, ${it.name} I'm Siloka, nice to meet you!"))
+                MessageModel(BOT_MESSAGE, "Hi, ${it.name} I'm Siloka, nice to meet you!"))
             messageAdapter.insertMessage(
-                MessageModel(0, "Let me help you find something you need."))
+                MessageModel(BOT_MESSAGE, "Let me help you find something you need."))
             messageAdapter.insertMessage(
-                MessageModel(0, "Choose any of the options below, or type your problem on the chatbox!"))
+                MessageModel(BOT_MESSAGE, "Choose any of the options below, or type your problem on the chatbox!"))
             messageAdapter.insertMessage(popularTopicsMsgObj)
         })
     }
 
     fun sendMessage(userMsg: String) {
-        messageAdapter.insertMessage(MessageModel(1, userMsg))
+        messageAdapter.insertMessage(MessageModel(USER_MESSAGE, userMsg))
         scrollToLatestMessage()
         showResponse()
 
@@ -142,16 +142,16 @@ class MainActivity : AppCompatActivity() {
 //            null, {
 //                try {
 //                    val botResponse = it.getString("cnt")
-//                    messagesList.add(MessageModel(0, botResponse))
+//                    messagesList.add(MessageModel(BOT_MESSAGE, botResponse))
 //                    messageAdapter?.notifyItemInserted(messagesList.size - 1)
 //                } catch (e: JSONException) {
 //                    e.printStackTrace()
-//                    messagesList.add(MessageModel(0,"No response", BOT_KEY))
+//                    messagesList.add(MessageModel(BOT_MESSAGE, "No response", BOT_KEY))
 //                    messageAdapter?.notifyItemInserted(messagesList.size - 1)
 //                }
 //            }
 //        ) {
-//            messagesList.add(MessageModel(0,"Sorry no response found", BOT_KEY))
+//            messagesList.add(MessageModel(BOT_MESSAGE,"Sorry no response found", BOT_KEY))
 //            Toast.makeText(
 //                this@MainActivity,
 //                "No response from the bot..",
@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         messageAdapter.insertMessage(
             MessageModel(
-                0,
+                BOT_MESSAGE,
                 """To pay for your booking via Indomaret or Alfamart, follow these steps: \n \n \
 
                 1. After you’ve completed your booking details, choose Indomaret or Alfamart on the payment page. \n \
@@ -206,10 +206,10 @@ class MainActivity : AppCompatActivity() {
     fun sendFeedback(isResponseOk: Boolean) {
         when(isResponseOk) {
             true -> {
-                messageAdapter.insertMessage(MessageModel(1, "Yes"))
+                messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             }
             false -> {
-                messageAdapter.insertMessage(MessageModel(1, "No"))
+                messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
                 Handler(Looper.getMainLooper())
                     .postDelayed({
                         showDirectToCSPrompt()
@@ -222,10 +222,10 @@ class MainActivity : AppCompatActivity() {
     fun sendToCs(isSendToCs: Boolean) {
         when(isSendToCs) {
             true -> {
-                messageAdapter.insertMessage(MessageModel(1, "Yes"))
+                messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             }
             false -> {
-                messageAdapter.insertMessage(MessageModel(1, "No"))
+                messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
             }
         }
         scrollToLatestMessage()
@@ -276,5 +276,14 @@ class MainActivity : AppCompatActivity() {
             }
             else -> true
         }
+    }
+
+    companion object {
+        private const val BOT_MESSAGE = 0
+        private const val USER_MESSAGE = 1
+        private const val POPULAR_TOPICS = 2
+        private const val RESPONSE_FEEDBACK_PROMPT = 3
+        private const val DIRECT_TO_CS_PROMPT = 4
+        private const val LOADING_MESSAGE = 5
     }
 }
