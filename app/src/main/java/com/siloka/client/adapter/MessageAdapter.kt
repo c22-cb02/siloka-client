@@ -178,9 +178,9 @@ class MessageAdapter (
                 ContextCompat.getColor(context, R.color.gray_300))
                 .apply {
                     id = R.id.lazy_loader
-                    animDuration = 750
-                    firstDelayDuration = 150
-                    secondDelayDuration = 250
+                    animDuration = 500
+                    firstDelayDuration = 250
+                    secondDelayDuration = 500
                     interpolator = DecelerateInterpolator()
                 }
 
