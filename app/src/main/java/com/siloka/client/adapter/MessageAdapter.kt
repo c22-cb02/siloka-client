@@ -110,10 +110,12 @@ class MessageAdapter (
 
         fun bindResponseFeedback() {
             (binding as ResponseFeedbackBinding).apply {
+                btnPromptYes.alpha = 1F
                 btnPromptYes.setOnClickListener {
                     (context as MainActivity).sendFeedback(true)
                     removeFeedbackOnClickListener()
                 }
+                btnPromptNo.alpha = 1F
                 btnPromptNo.setOnClickListener {
                     (context as MainActivity).sendFeedback(false)
                     removeFeedbackOnClickListener()
@@ -136,10 +138,12 @@ class MessageAdapter (
 
         fun bindDirectToCs() {
             (binding as DirectToCsBinding).apply {
+                btnPromptYes.alpha = 1F
                 btnPromptYes.setOnClickListener {
                     (context as MainActivity).sendToCs(true)
                     removeDirectToCsOnClickListener()
                 }
+                btnPromptNo.alpha = 1F
                 btnPromptNo.setOnClickListener {
                     (context as MainActivity).sendToCs(false)
                     removeDirectToCsOnClickListener()

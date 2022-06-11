@@ -163,9 +163,9 @@ class MainActivity : AppCompatActivity() {
     private fun showGreetings() {
         viewModel.getUser().observe(this, {
             messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Hi, ${it.name} I'm Siloka, nice to meet you!"))
+                MessageModel(BOT_MESSAGE, "Hi, ${it.name}. I'm Siloka, nice to meet you!"))
             messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Let me help you find something you need."))
+                MessageModel(BOT_MESSAGE, "Do you have any questions about using Traveloka?"))
             messageAdapter.insertMessage(
                 MessageModel(BOT_MESSAGE, "Choose any of the options below, or type your problem on the chatbox!"))
             messageAdapter.insertMessage(popularTopicsMsgObj)
