@@ -14,8 +14,8 @@
 
         <LinearLayout
             android:id="@+id/llLoading"
-            android:paddingVertical="6dp"
-            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
