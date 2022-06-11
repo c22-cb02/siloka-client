@@ -1,5 +1,6 @@
 package com.siloka.client.views.main
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -13,17 +14,26 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.siloka.client.R
 import com.siloka.client.adapter.MessageAdapter
 import com.siloka.client.data.models.MessageModel
+import com.siloka.client.data.preferences.UserPreferences
 import com.siloka.client.databinding.ActivityMainBinding
+import com.siloka.client.views.ViewModelFactory
 import com.siloka.client.views.settings.SettingsActivity
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var messageAdapter: MessageAdapter
+    private lateinit var viewModel: MainViewModel
 
     private var rvChatroom: RecyclerView? = null
     private var ibSendMessage: RelativeLayout? = null
@@ -44,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         setHeader()
+        setViewModel()
         setFixedMessages()
+
         bindRV()
         bindChatbox()
     }
@@ -53,6 +65,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF39C4F3")))
+    }
+
+    private fun setViewModel () {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreferences.getInstance(dataStore))
+        )[MainViewModel::class.java]
     }
 
     private fun setFixedMessages() {
@@ -98,13 +117,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setInitialMessages() {
-        messageAdapter.insertMessage(
-            MessageModel(0, "Hi, Brodie! I'm Siloka, nice to meet you!"))
-        messageAdapter.insertMessage(
-            MessageModel(0, "Let me help you find something you need."))
-        messageAdapter.insertMessage(
-            MessageModel(0, "Choose any of the options below, or type your problem on the chatbox!"))
-        messageAdapter.insertMessage(popularTopicsMsgObj)
+        viewModel.getUser().observe(this, {
+            messageAdapter.insertMessage(
+                MessageModel(0, "Hi, ${it.name} I'm Siloka, nice to meet you!"))
+            messageAdapter.insertMessage(
+                MessageModel(0, "Let me help you find something you need."))
+            messageAdapter.insertMessage(
+                MessageModel(0, "Choose any of the options below, or type your problem on the chatbox!"))
+            messageAdapter.insertMessage(popularTopicsMsgObj)
+        })
     }
 
     fun sendMessage(userMsg: String) {

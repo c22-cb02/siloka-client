@@ -3,6 +3,7 @@ package com.siloka.client.views
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.siloka.client.data.preferences.UserPreferences
+import com.siloka.client.views.main.MainViewModel
 import com.siloka.client.views.onboarding.OnboardingViewModel
 import com.siloka.client.views.settings.SettingsViewModel
 import com.siloka.client.views.splashscreen.SplashScreenViewModel
@@ -22,6 +23,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
                 SettingsViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

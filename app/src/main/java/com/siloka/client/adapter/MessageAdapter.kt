@@ -1,7 +1,6 @@
 package com.siloka.client.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -66,10 +65,7 @@ class MessageAdapter (
 
     override fun getItemCount(): Int = messagesList.size
 
-    override fun getItemViewType(position: Int): Int {
-        Log.d("INFO", messagesList[position].viewType.toString())
-        return messagesList[position].viewType
-    }
+    override fun getItemViewType(position: Int): Int = messagesList[position].viewType
 
     fun insertMessage(message: MessageModel) {
         this.messagesList.add(message)
@@ -86,6 +82,7 @@ class MessageAdapter (
         private val binding: ViewBinding,
         private val context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bindUserMsg(message: MessageModel) {
             (binding as UserMsgBinding).tvUserMsg.text = message.message
         }
