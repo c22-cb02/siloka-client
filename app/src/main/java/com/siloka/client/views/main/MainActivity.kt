@@ -64,12 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         setHeader()
         setViewModel()
-        setFixedMessages()
-        setRequestQueue()
-        getRoomId()
 
         bindRV()
         bindChatbox()
+
+        setFixedMessages()
+        setRequestQueue()
+        getRoomId()
     }
 
     private fun setHeader() {
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRoomId() {
+        setLoading(true)
         val getRoomIdRequest = JsonObjectRequest(
             Request.Method.GET,
             "${BASE_API_URL}${GET_ROOMID_PATH}",
@@ -106,20 +108,23 @@ class MainActivity : AppCompatActivity() {
                 try {
                     roomId = it.getString("room_id")
                     Log.i("SILOKA", "Successfully acquired room_id: $roomId")
+                    setLoading(false)
 
                     // Only render greetings and poptop
                     // once roomId is set
-                    setInitialMessages()
+                    showGreetings()
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Log.e("SILOKA", "Error parsing room_id data", e)
                     showToast(this, getString(R.string.err_client))
+                    setLoading(false)
                 }
             }
         ) {
             it.printStackTrace()
             Log.e("SILOKA", "Error on acquiring response from server", it)
             showToast(this, getString(R.string.err_server))
+            setLoading(false)
         }
 
         mRequestQueue.add(getRoomIdRequest)
@@ -153,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setInitialMessages() {
+    private fun showGreetings() {
         viewModel.getUser().observe(this, {
             messageAdapter.insertMessage(
                 MessageModel(BOT_MESSAGE, "Hi, ${it.name} I'm Siloka, nice to meet you!"))
@@ -174,6 +179,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        setLoading(true)
         val postUserMessageRequest = JsonObjectRequest(
             Request.Method.POST,
             "${BASE_API_URL}${POST_MESSAGE_PATH}",
@@ -187,28 +193,34 @@ class MainActivity : AppCompatActivity() {
                 try {
                     showBotResponse(
                         MessageModel(
-                            it.getInt("viewType") or 0,
+                            BOT_MESSAGE,
                             it.getString("message"),
                         )
                     )
                     Log.i("SILOKA", "Successfully posted message & get bot response")
+                    setLoading(false)
+
+                    // Show feedback prompt only after
+                    // query answer response is showed
+                    showFeedbackPrompt()
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Log.e("SILOKA", "Error on parsing JSON", e)
                     showToast(this, getString(R.string.err_client))
+                    setLoading(false)
                 }
             },
         ) {
             it.printStackTrace()
             Log.e("SILOKA", "Error on acquiring response from server", it)
             showToast(this, getString(R.string.err_server))
+            setLoading(false)
         }
 
         mRequestQueue.add(postUserMessageRequest)
     }
 
     private fun showBotResponse(messageObj: MessageModel) {
-        setLoading(true)
         messageAdapter.insertMessage(
             MessageModel(
                 BOT_MESSAGE,
@@ -216,29 +228,26 @@ class MainActivity : AppCompatActivity() {
             )
         )
         scrollToLatestMessage()
-        setLoading(false)
+    }
 
+    private fun showFeedbackPrompt() {
         Handler(Looper.getMainLooper())
             .postDelayed({
-                setLoading(true)
                 messageAdapter.insertMessage(responseFeedbackMsgObj)
                 scrollToLatestMessage()
-                setLoading(false)
             }, 1000)
     }
 
     private fun showDirectToCSPrompt() {
-        setLoading(true)
         Handler(Looper.getMainLooper())
             .postDelayed({
                 messageAdapter.insertMessage(directToCsMsgObj)
                 scrollToLatestMessage()
             }, 1000)
-        setLoading(false)
     }
 
-    fun sendFeedback(isResponseOk: Boolean) {
-        when(isResponseOk) {
+    fun sendFeedback(isAnswerOk: Boolean) {
+        when(isAnswerOk) {
             true -> {
                 messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             }
@@ -251,16 +260,48 @@ class MainActivity : AppCompatActivity() {
             }
         }
         scrollToLatestMessage()
+
+        setLoading(true)
+        val postFeedbackRequest = JsonObjectRequest(
+            Request.Method.POST,
+            "${BASE_API_URL}${POST_FEEDBACK_PATH}",
+            JSONObject(
+                mutableMapOf(
+                    "room_id" to roomId,
+                    "is_answer_ok" to isAnswerOk
+                ) as Map<String, Any?>
+            ),
+            {
+                try {
+                    if (isAnswerOk) {
+                        showBotResponse(
+                            MessageModel(
+                                BOT_MESSAGE,
+                                it.getString("message"),
+                            )
+                        )
+                    }
+                    Log.i("SILOKA", "Successfully posted feedback & get bot response")
+                    setLoading(false)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Log.e("SILOKA", "Error on parsing feedback JSON", e)
+                    setLoading(false)
+                }
+            },
+        ) {
+            it.printStackTrace()
+            Log.e("SILOKA", "Error on posting feedback", it)
+            setLoading(false)
+        }
+
+        mRequestQueue.add(postFeedbackRequest)
     }
 
     fun sendToCs(isSendToCs: Boolean) {
         when(isSendToCs) {
-            true -> {
-                messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
-            }
-            false -> {
-                messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
-            }
+            true -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
+            false -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
         }
         scrollToLatestMessage()
     }
@@ -312,8 +353,11 @@ class MainActivity : AppCompatActivity() {
         private const val DIRECT_TO_CS_PROMPT = 4
         private const val LOADING_MESSAGE = 5
 
-        private const val BASE_API_URL = "http://35.240.219.237"
+        private const val LOCAL_API_URL = "http://192.168.1.5"
+        private const val BASE_API_URL = "http://34.87.10.208"
         private const val GET_ROOMID_PATH = "/generate-roomid"
         private const val POST_MESSAGE_PATH = "/message"
+        private const val POST_FEEDBACK_PATH = "/feedback"
+        private const val POST_DIRECT_TO_CS_PATH = "/to-cs"
     }
 }

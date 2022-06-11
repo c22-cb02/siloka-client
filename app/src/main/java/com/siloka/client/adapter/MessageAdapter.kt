@@ -112,9 +112,24 @@ class MessageAdapter (
             (binding as ResponseFeedbackBinding).apply {
                 btnPromptYes.setOnClickListener {
                     (context as MainActivity).sendFeedback(true)
+                    removeFeedbackOnClickListener()
                 }
                 btnPromptNo.setOnClickListener {
                     (context as MainActivity).sendFeedback(false)
+                    removeFeedbackOnClickListener()
+                }
+            }
+        }
+
+        private fun removeFeedbackOnClickListener() {
+            (binding as ResponseFeedbackBinding).apply {
+                btnPromptYes.alpha = 0.5F
+                btnPromptYes.setOnClickListener {
+                    return@setOnClickListener
+                }
+                btnPromptNo.alpha = 0.5F
+                btnPromptNo.setOnClickListener {
+                    return@setOnClickListener
                 }
             }
         }
