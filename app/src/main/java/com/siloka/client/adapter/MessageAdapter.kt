@@ -138,9 +138,24 @@ class MessageAdapter (
             (binding as DirectToCsBinding).apply {
                 btnPromptYes.setOnClickListener {
                     (context as MainActivity).sendToCs(true)
+                    removeDirectToCsOnClickListener()
                 }
                 btnPromptNo.setOnClickListener {
                     (context as MainActivity).sendToCs(false)
+                    removeDirectToCsOnClickListener()
+                }
+            }
+        }
+
+        private fun removeDirectToCsOnClickListener() {
+            (binding as DirectToCsBinding).apply {
+                btnPromptYes.alpha = 0.5F
+                btnPromptYes.setOnClickListener {
+                    return@setOnClickListener
+                }
+                btnPromptNo.alpha = 0.5F
+                btnPromptNo.setOnClickListener {
+                    return@setOnClickListener
                 }
             }
         }

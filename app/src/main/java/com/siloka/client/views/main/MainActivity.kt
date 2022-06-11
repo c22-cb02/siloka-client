@@ -112,7 +112,9 @@ class MainActivity : AppCompatActivity() {
 
                     // Only render greetings and poptop
                     // once roomId is set
-                    showGreetings()
+                    if (this::roomId.isInitialized) {
+                        showGreetings()
+                    }
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Log.e("SILOKA", "Error parsing room_id data", e)
@@ -175,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         scrollToLatestMessage()
 
         if (!this::roomId.isInitialized) {
-            showToast(this, "Error on connecting with our server")
+            showToast(this, "Error on connecting with our server \nPlease try again")
             return
         }
 
@@ -191,12 +193,7 @@ class MainActivity : AppCompatActivity() {
             ),
             {
                 try {
-                    showBotResponse(
-                        MessageModel(
-                            BOT_MESSAGE,
-                            it.getString("message"),
-                        )
-                    )
+                    showBotResponse(MessageModel(BOT_MESSAGE,it.getString("message")))
                     Log.i("SILOKA", "Successfully posted message & get bot response")
                     setLoading(false)
 
@@ -274,12 +271,7 @@ class MainActivity : AppCompatActivity() {
             {
                 try {
                     if (isAnswerOk) {
-                        showBotResponse(
-                            MessageModel(
-                                BOT_MESSAGE,
-                                it.getString("message"),
-                            )
-                        )
+                        showBotResponse(MessageModel(BOT_MESSAGE, it.getString("message")))
                     }
                     Log.i("SILOKA", "Successfully posted feedback & get bot response")
                     setLoading(false)
@@ -304,6 +296,32 @@ class MainActivity : AppCompatActivity() {
             false -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
         }
         scrollToLatestMessage()
+
+        if (isSendToCs) {
+            setLoading(true)
+            val postDirectToCS = JsonObjectRequest(
+                Request.Method.GET,
+                "${BASE_API_URL}${POST_DIRECT_TO_CS_PATH}?room_id=${roomId}",
+                null,
+                {
+                    try {
+                        showBotResponse(MessageModel(BOT_MESSAGE, it.getString("message")))
+                        Log.i("SILOKA", "Successfully posted direct to cs response")
+                        setLoading(false)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        Log.e("SILOKA", "Error on parsing direct to cs response JSON", e)
+                        setLoading(false)
+                    }
+                },
+            ) {
+                it.printStackTrace()
+                Log.e("SILOKA", "Error on posting feedback", it)
+                setLoading(false)
+            }
+
+            mRequestQueue.add(postDirectToCS)
+        }
     }
 
     private fun setLoading(isLoading: Boolean) {
