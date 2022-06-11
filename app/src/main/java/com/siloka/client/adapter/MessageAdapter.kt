@@ -3,8 +3,12 @@ package com.siloka.client.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.agrawalsuneet.dotsloader.loaders.LazyLoader
+import com.siloka.client.R
 import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.*
 import com.siloka.client.views.main.MainActivity
@@ -131,7 +135,22 @@ class MessageAdapter (
         }
 
         fun bindBotLoading() {
-            return
+            val botLoadingBinding = binding as BotLoadingBinding
+            botLoadingBinding.llLoading.removeAllViewsInLayout()
+
+            val lazyLoader = LazyLoader(context, 10, 6,
+                ContextCompat.getColor(context, R.color.white),
+                ContextCompat.getColor(context, R.color.gray_200),
+                ContextCompat.getColor(context, R.color.gray_300))
+                .apply {
+                    id = R.id.lazy_loader
+                    animDuration = 750
+                    firstDelayDuration = 150
+                    secondDelayDuration = 250
+                    interpolator = DecelerateInterpolator()
+                }
+
+            botLoadingBinding.llLoading.addView(lazyLoader)
         }
     }
 }
