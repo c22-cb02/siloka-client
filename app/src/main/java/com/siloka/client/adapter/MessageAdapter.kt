@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.siloka.client.data.models.MessageModel
-import com.siloka.client.databinding.BotMsgBinding
-import com.siloka.client.databinding.ResponseFeedbackBinding
-import com.siloka.client.databinding.ShortcutHcBinding
-import com.siloka.client.databinding.UserMsgBinding
+import com.siloka.client.databinding.*
 import com.siloka.client.views.main.MainActivity
 
 class MessageAdapter (
@@ -36,7 +33,7 @@ class MessageAdapter (
                 parent,
                 false
             )
-            4 -> BotMsgBinding.inflate(
+            4 -> DirectToCsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -61,7 +58,7 @@ class MessageAdapter (
             1 -> holder.bindUserMsg(messageObj)
             2 -> holder.bindShortcutHc()
             3 -> holder.bindResponseFeedback()
-            4 -> holder.bindUserMsg(messageObj)
+            4 -> holder.bindDirectToCs()
             5 -> holder.bindUserMsg(messageObj)
             else -> holder.bindBotMsg(messageObj)
         }
@@ -115,6 +112,17 @@ class MessageAdapter (
                 }
                 btnPromptNo.setOnClickListener {
                     (context as MainActivity).sendFeedback(false)
+                }
+            }
+        }
+
+        fun bindDirectToCs() {
+            (binding as DirectToCsBinding).apply {
+                btnPromptYes.setOnClickListener {
+                    (context as MainActivity).sendToCS(true)
+                }
+                btnPromptNo.setOnClickListener {
+                    (context as MainActivity).sendToCS(false)
                 }
             }
         }

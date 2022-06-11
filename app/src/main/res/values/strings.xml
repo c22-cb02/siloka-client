@@ -33,6 +33,7 @@
     <string name="et_chatbox_hint">Ask a question</string>
     <string name="fab_send_chat_img_alt">Send Message</string>
     <string name="tv_feedback_label">Are you satisfied with the answer?</string>
+    <string name="tv_direct_to_cs_label">Do you want to be put through our Customer Service?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
 

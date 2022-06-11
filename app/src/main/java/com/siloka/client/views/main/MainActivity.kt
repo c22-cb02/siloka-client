@@ -156,8 +156,29 @@ class MainActivity : AppCompatActivity() {
             }, 1000)
     }
 
+    private fun showDirectToCSPrompt() {
+        Handler(Looper.getMainLooper())
+            .postDelayed({
+                messageAdapter.insertMessage(MessageModel(4, null))
+                scrollToLatestMessage()
+            }, 1000)
+    }
+
     fun sendFeedback(isResponseOk: Boolean) {
         when(isResponseOk) {
+            true -> {
+                messageAdapter.insertMessage(MessageModel(1, "Yes"))
+            }
+            false -> {
+                messageAdapter.insertMessage(MessageModel(1, "No"))
+                showDirectToCSPrompt()
+            }
+        }
+        scrollToLatestMessage()
+    }
+
+    fun sendToCS(isSendToCS: Boolean) {
+        when(isSendToCS) {
             true -> {
                 messageAdapter.insertMessage(MessageModel(1, "Yes"))
             }
@@ -169,7 +190,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun scrollToLatestMessage() {
-        binding.rvChatroom.scrollToPosition(messageAdapter.messagesList.size - 1)
+        binding.rvChatroom.scrollToPosition(messageAdapter.itemCount - 1)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

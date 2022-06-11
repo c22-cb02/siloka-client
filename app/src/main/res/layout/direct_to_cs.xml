@@ -6,15 +6,15 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/response_feedback"
-        android:text="@string/tv_feedback_label"
+        android:id="@+id/direct_to_cs"
+        android:text="@string/tv_direct_to_cs_label"
+        android:fontFamily="@font/inter_700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@drawable/bg_bot"
         android:paddingVertical="16dp"
         android:paddingHorizontal="20dp"
-        android:fontFamily="@font/inter_700"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         android:showDividers="middle"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/response_feedback">
+        app:layout_constraintTop_toBottomOf="@+id/direct_to_cs">
 
         <TextView
             android:id="@+id/btn_prompt_no"
