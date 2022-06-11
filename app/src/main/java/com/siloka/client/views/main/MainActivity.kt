@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -95,7 +97,8 @@ class MainActivity : AppCompatActivity() {
 
     fun sendMessage(userMsg: String) {
         messageAdapter.insertMessage(MessageModel(1, userMsg))
-        binding.rvChatroom.scrollToPosition(messageAdapter.messagesList.size - 1)
+        scrollToLatestMessage()
+        showResponse()
 
 //        val url = "Enter you API URL here$userMsg"
 //        val queue = Volley.newRequestQueue(this@MainActivity)
@@ -124,6 +127,49 @@ class MainActivity : AppCompatActivity() {
 //        }
 //
 //        queue.add(jsonObjectRequest)
+    }
+
+    private fun showResponse() {
+        messageAdapter.insertMessage(
+            MessageModel(
+                0,
+                """To pay for your booking via Indomaret or Alfamart, follow these steps: \n \n \
+
+                1. After you’ve completed your booking details, choose Indomaret or Alfamart on the payment page. \n \
+                2. Tap Pay at Indomaret/Alfamart. \n \
+                3. Go to the nearest Indomaret/Alfamart and show your payment code to the cashier. Then, make the payment. Make sure to ask the cashier for the receipt. \n \
+                4. Once your payment at Indomaret or Alfamart is completed, your Traveloka e-ticket/voucher and receipt will be sent to the email address you used for booking within 60 minutes. \n \n \
+
+                Things to note: \n \n \
+
+                1. For each transaction, Alfamart charges a fee of Rp2.500 while Indomaret charges Rp5.000. \n \
+                2. Payment via Indomaret or Alfamart is only available for transactions amounting up to Rp5.000.000. \n \
+                For further information : https://www.traveloka.com/en-id/help/general-info/general-information-payment/paying-in-idr/how-to-pay-for-my-booking-via-indomaret-or-alfamart
+                """
+            ))
+        scrollToLatestMessage()
+
+        Handler(Looper.getMainLooper())
+            .postDelayed({
+                messageAdapter.insertMessage(MessageModel(3, null))
+                scrollToLatestMessage()
+            }, 1000)
+    }
+
+    fun sendFeedback(isResponseOk: Boolean) {
+        when(isResponseOk) {
+            true -> {
+                messageAdapter.insertMessage(MessageModel(1, "Yes"))
+            }
+            false -> {
+                messageAdapter.insertMessage(MessageModel(1, "No"))
+            }
+        }
+        scrollToLatestMessage()
+    }
+
+    private fun scrollToLatestMessage() {
+        binding.rvChatroom.scrollToPosition(messageAdapter.messagesList.size - 1)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

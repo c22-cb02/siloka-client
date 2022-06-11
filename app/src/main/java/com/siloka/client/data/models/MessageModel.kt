@@ -6,7 +6,8 @@ package com.siloka.client.data.models
  * - 1 = user
  * - 2 = poptop
  * - 3 = feedback
- * - 4 = loading
+ * - 4 = lanjut CS
+ * - 5 = loading
  */
 
 data class MessageModel (
