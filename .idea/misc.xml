@@ -18,7 +18,9 @@
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/menu/option_menu.xml" value="0.176" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2784615384615385" />
         <entry key="app/src/main/res/drawable/bg_bot.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_btn_prompt_no.xml" value="0.25277777777777777" />
         <entry key="app/src/main/res/drawable/bg_popular.xml" value="0.25925925925925924" />
+        <entry key="app/src/main/res/drawable/bg_prompt_btn.xml" value="0.25277777777777777" />
         <entry key="app/src/main/res/drawable/bg_topic.xml" value="0.25925925925925924" />
         <entry key="app/src/main/res/drawable/bg_type.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/bg_user.xml" value="0.199" />
