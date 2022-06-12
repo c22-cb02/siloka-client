@@ -1,12 +1,15 @@
 <resources>
     <!--  Common  -->
     <string name="app_name">Siloka</string>
+    <string name="si_loka">Si Loka</string>
     <string name="siloka">siloka</string>
     <string name="siloka_colored">
         <font color="#000000">si</font><font color="#39C4F3">loka</font>
     </string>
     <string name="traveloka">traveloka</string>
     <string name="traveloka_logo_cd">Traveloka Logo</string>
+    <string name="err_server">Oops! Some mishaps on our server</string>
+    <string name="err_client">Oops! Some mishaps on our side</string>
 
     <!--  Splash Screen  -->
     <string name="app_desc">a support center app by</string>
@@ -28,5 +31,20 @@
     <string name="settings_desc">Tell Si Loka how do you \nprefer to be addressed</string>
 
     <!-- Chatroom -->
-    <string name="popular_topics">Popular Topics</string>
+    <string name="popular_topics">Choose one of the popular topics below!</string>
+    <string name="et_chatbox_hint">Ask a question</string>
+    <string name="fab_send_chat_img_alt">Send Message</string>
+    <string name="tv_feedback_label">Are you satisfied with the answer?</string>
+    <string name="tv_direct_to_cs_label">Do you want to be put through our Customer Service?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+    <!--  Chatroom Toolbar & Option Menu  -->
+    <string name="option_setting">Setting</string>
+
+    <!--Topics-->
+    <string name="how_to_reschedule_a_flight_booking">How to Reschedule a Flight Booking?</string>
+    <string name="how_to_cancel_and_refund_a_flight_booking">How to Cancel and Refund a Flight Booking?</string>
+    <string name="how_to_check_in_online">How To Check In Online?</string>
+    <string name="how_to_correct_flight_passenger_name">How To Correct Flight Passenger Name?</string>
 </resources>

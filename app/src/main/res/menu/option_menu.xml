@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:menuCategory="container">
-        <item android:id="@+id/menu1"
-            android:title="Option"
+        <item android:id="@+id/option_setting"
+            android:title="@string/option_setting"
             android:icon = "@drawable/ic_baseline_settings_24"
-            app:showAsAction="always" />
+            app:showAsAction="ifRoom" />
     </group>
 </menu>

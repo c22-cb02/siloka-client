@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -15,6 +13,7 @@ import com.siloka.client.R
 import com.siloka.client.data.models.UserModel
 import com.siloka.client.data.preferences.UserPreferences
 import com.siloka.client.databinding.ActivityOnboardingBinding
+import com.siloka.client.utilities.delay
 import com.siloka.client.utilities.showToast
 import com.siloka.client.views.ViewModelFactory
 import com.siloka.client.views.main.MainActivity
@@ -70,7 +69,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun goToMain() {
-        Handler(Looper.getMainLooper()).postDelayed({
+        delay({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

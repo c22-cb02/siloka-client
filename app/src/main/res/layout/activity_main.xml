@@ -1,74 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_300"
+            android:paddingVertical="4dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.Siloka">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_siloka_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/tvlk_ic_fill_notext"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/blue_500"
+                tools:ignore="ImageContrastCheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:fontFamily="@font/museo_sans_700"
+                android:gravity="center_vertical"
+                android:text="@string/si_loka"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                tools:ignore="TextContrastCheck" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/iv_tvlk_logo_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/siloka"
+        android:gravity="center"
+        android:translationZ="-100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_chatroom"
+        app:layout_constraintEnd_toEndOf="@+id/rv_chatroom"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/rv_chatroom"
+        app:layout_constraintTop_toTopOf="@+id/rv_chatroom"
+        app:layout_constraintVertical_bias="0.499"
+        app:srcCompat="@drawable/tvlk_bg_280"
+        tools:ignore="ImageContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvChat"
+        android:id="@+id/rv_chatroom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/transparent_white"
         android:clipToPadding="false"
-        android:paddingTop="10dp"
-        android:paddingBottom="50dp" />
+        android:paddingTop="72dp"
+        android:paddingBottom="80dp"
+        android:paddingHorizontal="10dp"
+        android:scrollbars="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="37dp" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/rvChat"
+        android:paddingVertical="3dp"
+        android:background="@color/gray_200"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_chatroom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
-            android:layout_toStartOf="@+id/btnSend"
+            android:layout_toStartOf="@+id/btn_send_chat"
             android:background="@drawable/bg_type"
             android:bottom="2dp"
             android:elevation="2dp"
             android:top="2dp">
 
             <EditText
-                android:id="@+id/edChat"
+                android:id="@+id/et_chatbox"
+                style="@style/Siloka.TextInputEditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="#fff"
-                android:hint="Type a Message"
-                android:minHeight="50dp"
-                android:textSize="18sp" />
+                android:layout_marginHorizontal="8dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/et_chatbox_hint"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:minHeight="25dp"
+                android:textSize="16sp"
+                tools:ignore="TextContrastCheck" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/btnSend"
+            android:id="@+id/btn_send_chat"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/sendbutton"
             android:elevation="4dp">
 
             <ImageView
-                android:id="@+id/fab_img"
+                android:id="@+id/fab_send_chat_img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerInParent="true"
+                android:contentDescription="@string/fab_send_chat_img_alt"
                 android:src="@drawable/ic_send_white_24dp"
-                app:tint="#ffffff" />
+                app:tint="#ffffff"
+                tools:ignore="ImageContrastCheck" />
         </RelativeLayout>
 
     </RelativeLayout>

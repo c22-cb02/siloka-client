@@ -16,18 +16,34 @@
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/user_sent_message.xml" value="0.2" />
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/layout/usermsg.xml" value="0.4" />
         <entry key="..\:/Users/asus/Documents/KULIAH/Semester 6/BANGKIT/siloka/siloka-client/app/src/main/res/menu/option_menu.xml" value="0.176" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2784615384615385" />
         <entry key="app/src/main/res/drawable/bg_bot.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_btn_prompt_no.xml" value="0.25277777777777777" />
+        <entry key="app/src/main/res/drawable/bg_popular.xml" value="0.25925925925925924" />
+        <entry key="app/src/main/res/drawable/bg_prompt_btn.xml" value="0.25277777777777777" />
+        <entry key="app/src/main/res/drawable/bg_topic.xml" value="0.25925925925925924" />
         <entry key="app/src/main/res/drawable/bg_type.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/bg_user.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2784615384615385" />
+        <entry key="app/src/main/res/drawable/ic_send_white_24dp.xml" value="0.2784615384615385" />
         <entry key="app/src/main/res/font/museo_sans_300.xml" value="0.2712962962962963" />
+        <entry key="app/src/main/res/layout-v28/bot_msg.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2418478260869565" />
-        <entry key="app/src/main/res/layout/bot_msg.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout/bot_loading.xml" value="0.5756097560975609" />
+        <entry key="app/src/main/res/layout/bot_msg.xml" value="1.7902097902097902" />
+        <entry key="app/src/main/res/layout/direct_to_cs.xml" value="0.19293478260869565" />
+        <entry key="app/src/main/res/layout/response_feedback.xml" value="0.47166046065062067" />
+        <entry key="app/src/main/res/layout/shortcut_hc.xml" value="0.4169611307420495" />
         <entry key="app/src/main/res/layout/shortcut_msg.xml" value="0.23404166121098258" />
         <entry key="app/src/main/res/layout/topic.xml" value="0.12916666666666668" />
         <entry key="app/src/main/res/layout/user_msg.xml" value="0.14764492753623187" />
         <entry key="app/src/main/res/layout/user_sent_message.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/menu/option_menu.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15208333333333332" />
       </map>
     </option>
   </component>
