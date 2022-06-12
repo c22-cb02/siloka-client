@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -30,6 +28,7 @@ import com.siloka.client.adapter.MessageAdapter
 import com.siloka.client.data.models.MessageModel
 import com.siloka.client.data.preferences.UserPreferences
 import com.siloka.client.databinding.ActivityMainBinding
+import com.siloka.client.utilities.delay
 import com.siloka.client.utilities.showToast
 import com.siloka.client.views.ViewModelFactory
 import com.siloka.client.views.settings.SettingsActivity
@@ -163,11 +162,8 @@ class MainActivity : AppCompatActivity() {
     private fun showGreetings() {
         viewModel.getUser().observe(this, {
             messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Hi, ${it.name}. I'm Siloka, nice to meet you!"))
-            messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Do you have any questions about using Traveloka?"))
-            messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Choose any of the options below, or type your problem on the chatbox!"))
+                MessageModel(BOT_MESSAGE, "Hi, ${it.name.trim()}. I'm Siloka, nice to meet you!"))
+            GREETINGS.map { messageObj -> messageAdapter.insertMessage(messageObj) }
             messageAdapter.insertMessage(popularTopicsMsgObj)
         })
     }
@@ -228,19 +224,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showFeedbackPrompt() {
-        Handler(Looper.getMainLooper())
-            .postDelayed({
-                messageAdapter.insertMessage(responseFeedbackMsgObj)
-                scrollToLatestMessage()
-            }, 1000)
+        delay({
+            messageAdapter.insertMessage(responseFeedbackMsgObj)
+            scrollToLatestMessage()
+        })
     }
 
     private fun showDirectToCSPrompt() {
-        Handler(Looper.getMainLooper())
-            .postDelayed({
-                messageAdapter.insertMessage(directToCsMsgObj)
-                scrollToLatestMessage()
-            }, 1000)
+        delay({
+            messageAdapter.insertMessage(directToCsMsgObj)
+            scrollToLatestMessage()
+        })
     }
 
     fun sendFeedback(isAnswerOk: Boolean) {
@@ -250,10 +244,7 @@ class MainActivity : AppCompatActivity() {
             }
             false -> {
                 messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
-                Handler(Looper.getMainLooper())
-                    .postDelayed({
-                        showDirectToCSPrompt()
-                    }, 1000)
+                delay({ showDirectToCSPrompt() })
             }
         }
         scrollToLatestMessage()
@@ -370,6 +361,17 @@ class MainActivity : AppCompatActivity() {
         private const val RESPONSE_FEEDBACK_PROMPT = 3
         private const val DIRECT_TO_CS_PROMPT = 4
         private const val LOADING_MESSAGE = 5
+
+        private val GREETINGS = arrayListOf(
+            MessageModel(
+                BOT_MESSAGE,
+                "Do you have any questions about using Traveloka?"
+            ),
+            MessageModel(
+                BOT_MESSAGE,
+                "Choose any of the options below, or type your problem on the chatbox!"
+            ),
+        )
 
         private const val LOCAL_API_URL = "http://192.168.1.5"
         private const val BASE_API_URL = "http://34.87.10.208"
