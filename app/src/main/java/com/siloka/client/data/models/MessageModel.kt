@@ -2,12 +2,12 @@ package com.siloka.client.data.models
 
 /**
  * viewType guide:
- * - 0 = bot
- * - 1 = user
- * - 2 = poptop
- * - 3 = feedback
- * - 4 = lanjut CS
- * - 5 = loading
+ * - 0 = Bot
+ * - 1 = User
+ * - 2 = Shortcut Message/Popular Topics
+ * - 3 = Feedback
+ * - 4 = Continue to CS Prompt
+ * - 5 = Loading
  */
 
 data class MessageModel (
