@@ -160,12 +160,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showGreetings() {
-        viewModel.getUser().observe(this, {
+        viewModel.getUser().observe(this) {
             messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Hi, ${it.name.trim()}. I'm Siloka, nice to meet you!"))
+                MessageModel(BOT_MESSAGE, "Hi, ${it.name.trim()}. I'm Siloka, nice to meet you!")
+            )
             GREETINGS.map { messageObj -> messageAdapter.insertMessage(messageObj) }
             messageAdapter.insertMessage(popularTopicsMsgObj)
-        })
+        }
     }
 
     fun sendMessage(userMsg: String) {
@@ -373,7 +374,7 @@ class MainActivity : AppCompatActivity() {
             ),
         )
 
-        private const val LOCAL_API_URL = "http://192.168.1.5"
+        // private const val LOCAL_API_URL = "http://192.168.1.5"
         private const val BASE_API_URL = "http://34.149.121.90"
         private const val GET_ROOMID_PATH = "/generate-roomid"
         private const val POST_MESSAGE_PATH = "/message"
