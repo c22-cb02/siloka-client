@@ -374,7 +374,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         private const val LOCAL_API_URL = "http://192.168.1.5"
-        private const val BASE_API_URL = "http://34.87.10.208"
+        private const val BASE_API_URL = "http://34.149.121.90"
         private const val GET_ROOMID_PATH = "/generate-roomid"
         private const val POST_MESSAGE_PATH = "/message"
         private const val POST_FEEDBACK_PATH = "/feedback"
