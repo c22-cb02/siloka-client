@@ -43,8 +43,8 @@
     <string name="option_setting">Setting</string>
 
     <!--Topics-->
-    <string name="how_to_reschedule_a_flight_booking">How to Reschedule a Flight Booking?</string>
-    <string name="how_to_cancel_and_refund_a_flight_booking">How to Cancel and Refund a Flight Booking?</string>
-    <string name="how_to_check_in_online">How To Check In Online?</string>
-    <string name="how_to_correct_flight_passenger_name">How To Correct Flight Passenger Name?</string>
+    <string name="tv_topic_1">How to Confirm My Payment?</string>
+    <string name="tv_topic_2">How to Book a Flight?</string>
+    <string name="tv_topic_3">Where can I Check My Payment Status?</string>
+    <string name="tv_topic_4">How to Pay for My Booking?</string>
 </resources>
