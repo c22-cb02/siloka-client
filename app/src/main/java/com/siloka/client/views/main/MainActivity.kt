@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF39C4F3")))
     }
 
-    private fun setViewModel () {
+    private fun setViewModel() {
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreferences.getInstance(dataStore))
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         val getRoomIdRequest = JsonObjectRequest(
             Request.Method.GET,
-            "${BASE_API_URL}${GET_ROOMID_PATH}",
+            "$BASE_API_URL$GET_ROOMID_PATH",
             null,
             {
                 try {
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         val postUserMessageRequest = JsonObjectRequest(
             Request.Method.POST,
-            "${BASE_API_URL}${POST_MESSAGE_PATH}",
+            "$BASE_API_URL$POST_MESSAGE_PATH",
             JSONObject(
                 mutableMapOf(
                     "room_id" to roomId,
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity() {
             ),
             {
                 try {
-                    showBotResponse(MessageModel(BOT_MESSAGE,it.getString("message")))
+                    showBotResponse(MessageModel(BOT_MESSAGE, it.getString("message")))
                     Log.i("SILOKA", "Successfully posted message & get bot response")
                     setLoading(false)
 
@@ -241,7 +241,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendFeedback(isAnswerOk: Boolean) {
-        when(isAnswerOk) {
+        when (isAnswerOk) {
             true -> {
                 messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             }
@@ -255,7 +255,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         val postFeedbackRequest = JsonObjectRequest(
             Request.Method.POST,
-            "${BASE_API_URL}${POST_FEEDBACK_PATH}",
+            "$BASE_API_URL$POST_FEEDBACK_PATH",
             JSONObject(
                 mutableMapOf(
                     "room_id" to roomId,
@@ -285,7 +285,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendToCs(isSendToCs: Boolean) {
-        when(isSendToCs) {
+        when (isSendToCs) {
             true -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             false -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
         }
@@ -295,7 +295,7 @@ class MainActivity : AppCompatActivity() {
             setLoading(true)
             val postDirectToCS = JsonObjectRequest(
                 Request.Method.GET,
-                "${BASE_API_URL}${POST_DIRECT_TO_CS_PATH}?room_id=${roomId}",
+                "$BASE_API_URL$POST_DIRECT_TO_CS_PATH?room_id=$roomId",
                 null,
                 {
                     try {

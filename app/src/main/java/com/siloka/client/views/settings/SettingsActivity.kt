@@ -42,7 +42,7 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun setViewModel () {
+    private fun setViewModel() {
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreferences.getInstance(dataStore))
@@ -51,10 +51,10 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun setPrefilledFormData() {
         etName = binding.etName
-        viewModel.getUser().observe(this, {
+        viewModel.getUser().observe(this) {
             nameData = it.name
             etName.setText(nameData)
-        })
+        }
     }
 
     private fun bindSaveUserButton() {
