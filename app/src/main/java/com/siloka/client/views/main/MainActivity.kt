@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var responseFeedbackMsgObj: MessageModel
     private lateinit var directToCsMsgObj: MessageModel
     private lateinit var loadingMsgObj: MessageModel
+    private lateinit var askAnotherQuestionMsgObj: MessageModel
 
     private lateinit var roomId: String
     private lateinit var mRequestQueue: RequestQueue
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF39C4F3")))
     }
 
-    private fun setViewModel () {
+    private fun setViewModel() {
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreferences.getInstance(dataStore))
@@ -90,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         responseFeedbackMsgObj = MessageModel(RESPONSE_FEEDBACK_PROMPT, null)
         directToCsMsgObj = MessageModel(DIRECT_TO_CS_PROMPT, null)
         loadingMsgObj = MessageModel(LOADING_MESSAGE, null)
+        askAnotherQuestionMsgObj = MessageModel(BOT_MESSAGE, getString(R.string.msg_ask_another_question))
     }
 
     private fun setRequestQueue() {
@@ -101,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         val getRoomIdRequest = JsonObjectRequest(
             Request.Method.GET,
-            "${BASE_API_URL}${GET_ROOMID_PATH}",
+            "$BASE_API_URL$GET_ROOMID_PATH",
             null,
             {
                 try {
@@ -160,12 +162,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showGreetings() {
-        viewModel.getUser().observe(this, {
+        viewModel.getUser().observe(this) {
             messageAdapter.insertMessage(
-                MessageModel(BOT_MESSAGE, "Hi, ${it.name.trim()}. I'm Siloka, nice to meet you!"))
+                MessageModel(BOT_MESSAGE, "Hi, ${it.name.trim()}. I'm Siloka, nice to meet you!")
+            )
             GREETINGS.map { messageObj -> messageAdapter.insertMessage(messageObj) }
             messageAdapter.insertMessage(popularTopicsMsgObj)
-        })
+        }
     }
 
     fun sendMessage(userMsg: String) {
@@ -180,7 +183,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         val postUserMessageRequest = JsonObjectRequest(
             Request.Method.POST,
-            "${BASE_API_URL}${POST_MESSAGE_PATH}",
+            "$BASE_API_URL$POST_MESSAGE_PATH",
             JSONObject(
                 mutableMapOf(
                     "room_id" to roomId,
@@ -189,7 +192,7 @@ class MainActivity : AppCompatActivity() {
             ),
             {
                 try {
-                    showBotResponse(MessageModel(BOT_MESSAGE,it.getString("message")))
+                    showBotResponse(MessageModel(BOT_MESSAGE, it.getString("message")))
                     Log.i("SILOKA", "Successfully posted message & get bot response")
                     setLoading(false)
 
@@ -238,7 +241,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendFeedback(isAnswerOk: Boolean) {
-        when(isAnswerOk) {
+        when (isAnswerOk) {
             true -> {
                 messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             }
@@ -252,7 +255,7 @@ class MainActivity : AppCompatActivity() {
         setLoading(true)
         val postFeedbackRequest = JsonObjectRequest(
             Request.Method.POST,
-            "${BASE_API_URL}${POST_FEEDBACK_PATH}",
+            "$BASE_API_URL$POST_FEEDBACK_PATH",
             JSONObject(
                 mutableMapOf(
                     "room_id" to roomId,
@@ -282,7 +285,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendToCs(isSendToCs: Boolean) {
-        when(isSendToCs) {
+        when (isSendToCs) {
             true -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "Yes"))
             false -> messageAdapter.insertMessage(MessageModel(USER_MESSAGE, "No"))
         }
@@ -292,7 +295,7 @@ class MainActivity : AppCompatActivity() {
             setLoading(true)
             val postDirectToCS = JsonObjectRequest(
                 Request.Method.GET,
-                "${BASE_API_URL}${POST_DIRECT_TO_CS_PATH}?room_id=${roomId}",
+                "$BASE_API_URL$POST_DIRECT_TO_CS_PATH?room_id=$roomId",
                 null,
                 {
                     try {
@@ -312,6 +315,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             mRequestQueue.add(postDirectToCS)
+        } else {
+            delay({
+                messageAdapter.insertMessage(askAnotherQuestionMsgObj)
+                scrollToLatestMessage()
+            })
         }
     }
 
@@ -373,8 +381,8 @@ class MainActivity : AppCompatActivity() {
             ),
         )
 
-        private const val LOCAL_API_URL = "http://192.168.1.5"
-        private const val BASE_API_URL = "http://34.87.10.208"
+        // private const val LOCAL_API_URL = "http://192.168.1.5"
+        private const val BASE_API_URL = "http://34.149.121.90"
         private const val GET_ROOMID_PATH = "/generate-roomid"
         private const val POST_MESSAGE_PATH = "/message"
         private const val POST_FEEDBACK_PATH = "/feedback"

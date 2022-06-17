@@ -10,15 +10,7 @@ package com.siloka.client.data.models
  * - 5 = Loading
  */
 
-data class MessageModel (
+data class MessageModel(
     var viewType: Int,
     var message: String?,
 )
-
-data class MessagePayload (
-    var room_id: String,
-    var query: String,
-)
-
-
-

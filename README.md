@@ -58,9 +58,8 @@ Siloka is a very user friendly chatbot, a new user will only needs to follow the
  
 **Your screen will appear like this:**
   
-  - Blom Direcord
   <kbd>
-  <img src=""/>
+  <img src="https://user-images.githubusercontent.com/47189456/174201040-6318a4c2-bcaf-48ec-b8c8-69cdc10e248a.gif" width="200"/>
   </kbd>    
   
 -----
@@ -97,15 +96,12 @@ Siloka is a very user friendly chatbot, a new user will only needs to follow the
 
 **Your screen will appear like this:**
   
-  Blom recrot
   <kbd>
-  <img src="" width="200"/>
+  <img src="https://user-images.githubusercontent.com/47189456/174200968-18a81025-adca-45cf-a62c-3af780582d0d.gif" width="200"/>
   </kbd> 
 
 ## Libraries used 
 
-- Gson
-- Retrofit2
 - Okhttp3
 - Volley
 - KTX
@@ -115,3 +111,8 @@ Siloka is a very user friendly chatbot, a new user will only needs to follow the
 - Firebase
 - [DotsLoader](https://github.com/agrawalsuneet/DotLoadersPack-Android)
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+
+## References
+
+- https://www.geeksforgeeks.org/how-to-create-a-chatbot-in-android-with-brainshop-api/
+- https://github.com/VidyasagarMSC/WatBot-Kotlin

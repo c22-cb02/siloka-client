@@ -22,6 +22,9 @@
             android:background="@drawable/bg_bot">
 
             <TextView
+                android:linksClickable="true"
+                android:autoLink="web"
+                android:textColorLink="@color/gray_200"
                 android:id="@+id/tv_bot_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
