@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Source https://jasondhl.medium.com/ktlint-git-hooked-on-it-48f4e08d1c8b
 # Stash the current index to be used in the event of failure
 git stash -q --keep-index
 
@@ -35,4 +36,5 @@ echo "$CHANGED_FILES" | while read -r file; do
     fi
 done
 echo "Completed ktlint hook."
+
 ######## KTLINT-GRADLE HOOK END ########
