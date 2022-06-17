@@ -2,8 +2,6 @@ name: Siloka Release Firebase App Distribution
 
 on:
   push:
-    branches:
-      - main
     tags:
       - v*
   release:
@@ -12,7 +10,6 @@ on:
 
 jobs:
   release:
-    if: ${{ github.event }} == 'release'
     runs-on: ubuntu-latest
     steps:
       - name: trust /github/workspace

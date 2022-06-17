@@ -7,7 +7,6 @@ on:
 
 jobs:
   debug:
-    if: ${{ github.event }} == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: trust /github/workspace
