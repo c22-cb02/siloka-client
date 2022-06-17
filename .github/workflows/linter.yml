@@ -1,4 +1,4 @@
-name: Run ktlint
+name: Ktlint Check
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       - synchronize
 
 jobs:
-  run:
+  check:
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
