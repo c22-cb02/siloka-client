@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var responseFeedbackMsgObj: MessageModel
     private lateinit var directToCsMsgObj: MessageModel
     private lateinit var loadingMsgObj: MessageModel
+    private lateinit var askAnotherQuestionMsgObj: MessageModel
 
     private lateinit var roomId: String
     private lateinit var mRequestQueue: RequestQueue
@@ -90,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         responseFeedbackMsgObj = MessageModel(RESPONSE_FEEDBACK_PROMPT, null)
         directToCsMsgObj = MessageModel(DIRECT_TO_CS_PROMPT, null)
         loadingMsgObj = MessageModel(LOADING_MESSAGE, null)
+        askAnotherQuestionMsgObj = MessageModel(BOT_MESSAGE, getString(R.string.msg_ask_another_question))
     }
 
     private fun setRequestQueue() {
@@ -313,6 +315,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             mRequestQueue.add(postDirectToCS)
+        } else {
+            delay({
+                messageAdapter.insertMessage(askAnotherQuestionMsgObj)
+                scrollToLatestMessage()
+            })
         }
     }
 
