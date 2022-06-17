@@ -13,9 +13,9 @@ import com.siloka.client.data.models.MessageModel
 import com.siloka.client.databinding.*
 import com.siloka.client.views.main.MainActivity
 
-class MessageAdapter (
+class MessageAdapter(
     private val context: Context
-): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
+) : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     private var messagesList = mutableListOf<MessageModel>()
 
@@ -172,10 +172,14 @@ class MessageAdapter (
             val botLoadingBinding = binding as BotLoadingBinding
             botLoadingBinding.llLoading.removeAllViewsInLayout()
 
-            val lazyLoader = LazyLoader(context, 10, 6,
+            val lazyLoader = LazyLoader(
+                context,
+                10,
+                6,
                 ContextCompat.getColor(context, R.color.white),
                 ContextCompat.getColor(context, R.color.gray_200),
-                ContextCompat.getColor(context, R.color.gray_300))
+                ContextCompat.getColor(context, R.color.gray_300)
+            )
                 .apply {
                     id = R.id.lazy_loader
                     animDuration = 500

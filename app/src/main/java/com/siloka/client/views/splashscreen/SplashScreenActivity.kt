@@ -57,7 +57,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun goToNextPage() {
-        viewModel.getUser().observe(this, {
+        viewModel.getUser().observe(this) {
             if (it.name.isNotBlank()) {
                 delay({
                     val intent = Intent(this, MainActivity::class.java)
@@ -71,6 +71,6 @@ class SplashScreenActivity : AppCompatActivity() {
                     finish()
                 }, 3000)
             }
-        })
+        }
     }
 }
