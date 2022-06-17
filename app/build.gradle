@@ -5,6 +5,8 @@ plugins {
     // Firebase-related plugins
     id 'com.google.firebase.appdistribution'
     id 'com.google.gms.google-services'
+    // ktlint-related plugin
+    id("org.jlleitschuh.gradle.ktlint") version ("10.2.1")
 }
 
 android {
